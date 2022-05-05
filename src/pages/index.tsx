@@ -1,25 +1,23 @@
 import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 
-export default function Home() {
+export default function Home({ pokemons }) {
+  console.log(pokemons);
   return <div>strona</div>;
 }
+
 export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
-      query Countries {
-        countries {
-          code
-          name
-          emoji
-        }
+      {
+        getAllPokemonSpecies
       }
     `,
   });
 
   return {
     props: {
-      countries: data.countries.slice(0, 4),
+      pokemons: data.getAllPokemonSpecies,
     },
- };
+  };
 }
