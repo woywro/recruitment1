@@ -1,9 +1,9 @@
 import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
+import { HomeView } from '../views/HomeView';
 
 export default function Home({ pokemons }) {
-  console.log(pokemons);
-  return <div>strona</div>;
+  return <HomeView pokemons={pokemons} />;
 }
 
 export async function getStaticProps() {
