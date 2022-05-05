@@ -1,17 +1,20 @@
 import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 
-export default function Home() {
+export default function Pokemon({ pokemon }) {
+  console.log(pokemon);
   return <div>strona</div>;
 }
+
 export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
-      query Countries {
-        countries {
-          code
-          name
-          emoji
+      {
+        getPokemon(pokemon: dragonite) {
+          sprite
+          num
+          species
+          color
         }
       }
     `,
@@ -19,7 +22,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      countries: data.countries.slice(0, 4),
+      pokemon: data.getPokemon,
     },
- };
+  };
 }
