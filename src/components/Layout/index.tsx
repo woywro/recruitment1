@@ -37,8 +37,8 @@ const ChildrenWrapper = styled.div`
 `;
 
 const ViewBox = styled.div`
-  width: 60vw;
-  height: 60vh;
+  width: 70vw;
+  height: 70vh;
   display: flex;
   justify-content: flex-start;
   flex-flow: column;

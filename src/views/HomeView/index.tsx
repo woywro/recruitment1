@@ -1,9 +1,14 @@
 import { PageWrapper } from '../style';
+import { List } from './components/List';
 
-export const HomeView = ({ pokemons }) => {
+interface Props {
+  pokemons: string[];
+}
+
+export const HomeView = ({ pokemons }: Props) => {
   return (
     <PageWrapper>
-      <div>d</div>
+      <List pokemons={pokemons} />
     </PageWrapper>
   );
 };
