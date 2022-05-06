@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import breakpoints from '../../theme/breakpoints';
 
 export const Item = styled.div<{ isActive?: boolean }>`
   text-decoration: none;
@@ -33,6 +34,12 @@ export const Links = styled.div`
   align-items: center;
   width: 100%;
   padding: 20px;
+  @media only screen and ${breakpoints.device.sm} {
+    display: none;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    display: none;
+  }
 `;
 
 export const NavItemText = styled.p`

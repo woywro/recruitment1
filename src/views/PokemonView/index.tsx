@@ -9,12 +9,27 @@ import { BasicInfo } from './components/BasicInfo';
 import { BaseStats } from './components/BaseStats';
 import { Abilities } from './components/Abilities';
 import styled from 'styled-components';
+import breakpoints from '../../theme/breakpoints';
 
 export const PokemonView = ({ pokemon }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>
       <Wrapper>
+        <Image
+          src={pokemon.sprite}
+          alt={pokemon.species}
+          width="150px"
+          height="150px"
+        ></Image>
+        <Text
+          style={{
+            fontFamily: "'Pokemon Solid', sans-serif",
+            fontSize: '40px',
+          }}
+        >
+          {pokemon.species}
+        </Text>
         <Grid>
           <BasicInfo pokemon={pokemon} />
           <Abilities pokemon={pokemon} />
@@ -44,5 +59,15 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   justify-items: center;
-  align-content: center;
+  align-items: center;
+  @media only screen and ${breakpoints.device.sm} {
+    display: flex;
+    flex-flow: column;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    grid-template-areas:
+      'a a'
+      'b b'
+      'c c';
+  }
 `;

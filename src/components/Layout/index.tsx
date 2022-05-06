@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { NavBar } from '../NavBar';
+import breakpoints from '../../theme/breakpoints';
+import { MobileNavBar } from '../MobileNavBar';
 
 interface Props {
   children: JSX.Element;
@@ -9,6 +11,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <Wrapper>
       <ViewBox>
+        <MobileNavBar />
         <NavBar />
         <>{children}</>
       </ViewBox>
@@ -36,4 +39,20 @@ const ViewBox = styled.div`
   border-radius: 20px;
   box-shadow: 0px 0px 0px 18px rgba(255, 255, 255, 0.3);
   background: ${(props) => props.theme.colors.primaryBg};
+  @media only screen and ${breakpoints.device.sm} {
+    width: 100vw;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    flex-flow: column;
+    overflow-y: scroll;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    width: 100vw;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    flex-flow: column;
+    overflow-y: scroll;
+  }
 `;
