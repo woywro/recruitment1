@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background: ${(props) => props.theme.colors.secondary};
+  background: ${(props) => props.theme.colors.primary};
   border-radius: 15px;
   color: #ffffff;
   cursor: pointer;

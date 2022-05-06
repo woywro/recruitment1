@@ -5,42 +5,44 @@ import { Button } from '../../components/Button';
 import { useState } from 'react';
 import { Modal } from '../../components/Modal';
 import { SpritesView } from '../SpritesView';
+import { BasicInfo } from './components/BasicInfo';
+import { BaseStats } from './components/BaseStats';
+import { Abilities } from './components/Abilities';
+import styled from 'styled-components';
 
 export const PokemonView = ({ pokemon }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>
       <Wrapper>
-        <Image
-          src={pokemon.sprite}
-          alt={pokemon.species}
-          width="150px"
-          height="150px"
-        ></Image>
-        <Text>{pokemon.species}</Text>
-        <Text>{pokemon.color}</Text>
-        <Text>{pokemon.gender.male}</Text>
-        <Text>{pokemon.gender.female}</Text>
-        <Text>{pokemon.height}</Text>
-        <Text>{pokemon.weight}</Text>
-        <Text>{pokemon.abilities.first}</Text>
-        <Text>{pokemon.abilities.second}</Text>
-        <Text>{pokemon.abilities.hidden}</Text>
-        <Text>{pokemon.baseStats.hp}</Text>
-        <Text>{pokemon.baseStats.attack}</Text>
-        <Text>{pokemon.baseStats.defense}</Text>
-        <Text>{pokemon.baseStats.specialattack}</Text>
-        <Text>{pokemon.baseStats.specialdefense}</Text>
-        <Text>{pokemon.baseStats.speed}</Text>
-        <Button onClick={() => setIsOpen(true)}>open modal</Button>
+        <Grid>
+          <BasicInfo pokemon={pokemon} />
+          <Abilities pokemon={pokemon} />
+          <BaseStats pokemon={pokemon} />
+        </Grid>
+        <Button onClick={() => setIsOpen(true)}>all available sprites</Button>
+        <Modal
+          title={'sprities'}
+          handleClose={() => setIsOpen(false)}
+          isOpen={isOpen}
+        >
+          <SpritesView pokemonSpecies={pokemon.species} />
+        </Modal>
       </Wrapper>
-      <Modal
-        title={'sprities'}
-        handleClose={() => setIsOpen(false)}
-        isOpen={isOpen}
-      >
-        <SpritesView pokemonSpecies={pokemon.species} />
-      </Modal>
     </PageWrapper>
   );
 };
+
+const Grid = styled.div`
+  display: grid;
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  grid-template-areas:
+    'a b'
+    'c c';
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  align-content: center;
+`;

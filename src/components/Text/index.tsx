@@ -9,10 +9,10 @@ export const Text = styled.p<{ size?: string; bold?: boolean; color?: string }>`
 const handleFontSize = (size?: string) => {
   switch (size) {
     case 'small':
-      return '14px';
-    case 'big':
-      return '24px';
-    default:
       return '16px';
+    case 'big':
+      return '26px';
+    default:
+      return '18px';
   }
 };

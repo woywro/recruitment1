@@ -1,13 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export const NavBarWrapper = styled.nav`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px;
-`;
-
 export const Item = styled.div<{ isActive?: boolean }>`
   text-decoration: none;
   color: black;
@@ -31,7 +23,6 @@ export const Item = styled.div<{ isActive?: boolean }>`
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
     border-radius: 20px;
   }
 `;
@@ -41,6 +32,7 @@ export const Links = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  padding: 20px;
 `;
 
 export const NavItemText = styled.p`

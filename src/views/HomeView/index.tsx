@@ -7,8 +7,8 @@ interface Props {
 
 export const HomeView = ({ pokemons }: Props) => {
   return (
-    <PageWrapper>
+    <>
       <List pokemons={pokemons} />
-    </PageWrapper>
+    </>
   );
 };

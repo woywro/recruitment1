@@ -10,7 +10,7 @@ export const Layout = ({ children }: Props) => {
     <Wrapper>
       <ViewBox>
         <NavBar />
-        <ChildrenWrapper>{children}</ChildrenWrapper>
+        <>{children}</>
       </ViewBox>
     </Wrapper>
   );
@@ -23,17 +23,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 0;
   background: ${(props) => props.theme.colors.gradient};
-`;
-
-const ChildrenWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 `;
 
 const ViewBox = styled.div`

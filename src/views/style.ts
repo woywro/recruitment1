@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: start;
   width: 100%;
   height: 100%;
 `;

@@ -18,20 +18,20 @@ export const List = ({ pokemons }: Props) => {
 };
 
 const ListWrapper = styled.ul`
-  display: flex;
-  flex-flow: column;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  justify-content: flex-start;
-  align-items: start;
   list-style: none;
-  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const PokemonListItem = styled.li`
-  background: purple;
-  padding: 5px;
+  background: white;
+  box-shadow: ${(props) => props.theme.shadow};
+  padding: 10px;
   margin: 2px;
   cursor: pointer;
 `;
