@@ -15,8 +15,8 @@ export const NavBar = () => {
             <NavItemText>Home</NavItemText>
           </Item>
         </Link>
-        <Link href={`/map`} passHref>
-          <Item isActive={router.pathname === '/map' ? true : false}>
+        <Link href={`/compare`} passHref>
+          <Item isActive={router.pathname === '/compare' ? true : false}>
             <NavItemText>Compare</NavItemText>
           </Item>
         </Link>
