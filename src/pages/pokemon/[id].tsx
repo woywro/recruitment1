@@ -1,8 +1,10 @@
 import { client } from '../../../apollo-client';
 import { gql } from '@apollo/client';
+import { PokemonView } from '../../views/PokemonView';
 
 export default function Pokemon({ pokemon }) {
-  return pokemon !== undefined && <div>{pokemon.species}</div>;
+  console.log(pokemon);
+  return pokemon !== undefined && <PokemonView pokemon={pokemon} />;
 }
 
 export async function getStaticPaths() {
@@ -31,6 +33,11 @@ export async function getStaticProps(context) {
           num
           species
           color
+          abilities { first second hidden }
+		      baseStats { hp attack defense specialattack specialdefense speed }
+		      gender { male female }
+		      height
+		      weight
         }
       }
     `,
