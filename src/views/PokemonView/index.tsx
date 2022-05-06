@@ -1,8 +1,13 @@
 import { PageWrapper, Wrapper } from '../style';
 import { Text } from '../../components/Text';
 import Image from 'next/image';
+import { Button } from '../../components/Button';
+import { useState } from 'react';
+import { Modal } from '../../components/Modal';
+import { SpritesView } from '../SpritesView';
 
 export const PokemonView = ({ pokemon }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>
       <Wrapper>
@@ -27,7 +32,15 @@ export const PokemonView = ({ pokemon }) => {
         <Text>{pokemon.baseStats.specialattack}</Text>
         <Text>{pokemon.baseStats.specialdefense}</Text>
         <Text>{pokemon.baseStats.speed}</Text>
+        <Button onClick={() => setIsOpen(true)}>open modal</Button>
       </Wrapper>
+      <Modal
+        title={'sprities'}
+        handleClose={() => setIsOpen(false)}
+        isOpen={isOpen}
+      >
+        <SpritesView pokemonSpecies={pokemon.species} />
+      </Modal>
     </PageWrapper>
   );
 };

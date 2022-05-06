@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
+    "@apollo/react-hooks": "^4.0.0",
+    "@favware/graphql-pokemon": "^6.5.10",
     "graphql": "^16.4.0",
     "next": "latest",
     "react": "17.0.2",
