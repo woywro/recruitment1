@@ -1,10 +1,46 @@
-import { PageWrapper } from '../style';
+import { useLazyQuery } from '@apollo/react-hooks';
+import type { Query } from '@favware/graphql-pokemon';
+import gql from 'graphql-tag';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import React, { useEffect, useState } from 'react';
-import { Text } from '../../components/Text';
-import { isAbsolute } from 'path';
+
+interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
+  data: Record<K, Omit<Query[K], '__typename'>>;
+}
+
+const GET_POKEMON_DETAILS = gql`
+  query ($pokemon: PokemonEnum!) {
+    getPokemon(pokemon: $pokemon) {
+      num
+      species
+      types
+      abilities {
+        first
+        second
+        hidden
+      }
+      baseStats {
+        hp
+        attack
+        defense
+        specialattack
+        specialdefense
+        speed
+      }
+      gender {
+        male
+        female
+      }
+      height
+      weight
+      sprite
+      shinySprite
+      backSprite
+      shinyBackSprite
+    }
+  }
+`;
 
 export const CompareView = ({ pokemons }) => {
   const [comparisionSlots, setComparisionSlots] = useState([
@@ -33,8 +69,14 @@ export const CompareView = ({ pokemons }) => {
       el.id === e.id ? { ...el, item: pokemon } : el
     );
     setComparisionSlots(res);
-    console.log(res);
+    getPokemon({ variables: { pokemon: pokemon.toLowerCase() } });
   };
+
+  const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <>
@@ -51,7 +93,7 @@ export const CompareView = ({ pokemons }) => {
                       <ListItem
                         onClick={() => handleAddToComparision(e, pokemon)}
                       >
-                        {pokemon}
+                        <Text>{pokemon}</Text>
                       </ListItem>
                     );
                   })}

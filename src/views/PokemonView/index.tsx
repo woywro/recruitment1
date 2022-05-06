@@ -1,15 +1,15 @@
-import { PageWrapper, Wrapper } from '../style';
-import { Text } from '../../components/Text';
 import Image from 'next/image';
-import { Button } from '../../components/Button';
 import { useState } from 'react';
-import { Modal } from '../../components/Modal';
-import { SpritesView } from '../SpritesView';
-import { BasicInfo } from './components/BasicInfo';
-import { BaseStats } from './components/BaseStats';
-import { Abilities } from './components/Abilities';
 import styled from 'styled-components';
+import { Button } from '../../components/Button';
+import { Modal } from '../../components/Modal';
+import { Text } from '../../components/Text';
 import breakpoints from '../../theme/breakpoints';
+import { SpritesView } from '../SpritesView';
+import { PageWrapper, Wrapper } from '../style';
+import { Abilities } from './components/Abilities';
+import { BaseStats } from './components/BaseStats';
+import { BasicInfo } from './components/BasicInfo';
 
 export const PokemonView = ({ pokemon }) => {
   const [isOpen, setIsOpen] = useState(false);
