@@ -1,6 +1,7 @@
 import { client } from '../../../apollo-client';
 import { gql } from '@apollo/client';
 import { PokemonView } from '../../views/PokemonView';
+import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 
 export default function Pokemon({ pokemon }) {
   console.log(pokemon);
@@ -15,13 +16,20 @@ export async function getStaticPaths() {
       }
     `,
   });
+  const pokemonsFiltered = data.getAllPokemonSpecies.slice(
+    data.getAllPokemonSpecies.indexOf('type:null'),
+    1
+  );
   return {
-    paths: data.getAllPokemonSpecies.map((species) => ({
-      params: { id: species },
+    paths: pokemonsFiltered.map((species) => ({
+      params: {
+        id: pokemonSpeciesFormatter(species),
+      },
     })),
     fallback: true,
   };
 }
+``;
 
 export async function getStaticProps(context) {
   const species = context.params.id.toString();
