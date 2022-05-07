@@ -33,7 +33,10 @@ export const PokemonChoiceCard = ({
       ) : (
         pokemons.map((pokemon: string) => {
           return (
-            <ListItem onClick={() => handleAddToComparision(id, pokemon)}>
+            <ListItem
+              key={pokemon}
+              onClick={() => handleAddToComparision(id, pokemon)}
+            >
               <Text>{pokemon}</Text>
             </ListItem>
           );

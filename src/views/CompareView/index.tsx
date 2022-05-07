@@ -8,6 +8,7 @@ import { Text } from '../../components/Text';
 import { PokemonCard } from './components/PokemonCard';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
+import { getHighestValues } from '../../utils/getHighestValues';
 
 interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
   data: Record<K, Omit<Query[K], '__typename'>>;
@@ -48,14 +49,51 @@ const GET_POKEMON_DETAILS = gql`
 
 export const CompareView = ({ pokemons }) => {
   const [comparisionCards, setComparisionCards] = useState([
-    { id: 1, item: null },
+    { id: 1, item: null, highestValues: null },
   ]);
+
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
+
+  //   const getHighestValues = (comparisionCards) => {
+  //     const r = comparisionCards.map((card) => {
+  //       if (card.item !== null) {
+  //         return card.item.baseStats;
+  //       }
+  //     });
+  //     const final = {
+  //       hp: Math.max(...r.map((x) => x.hp)),
+  //       attack: Math.max(...r.map((x) => x.attack)),
+  //       defense: Math.max(...r.map((x) => x.defense)),
+  //     };
+  //     console.log(final);
+  //   };
+
+  //   const highlightHighestValues = () => {
+  //     const cardsToGetValuesFrom = [];
+  //     comparisionCards.map((card) => {
+  //       if (card.item !== null) {
+  //         cardsToGetValuesFrom.push(Object.entries({ ...card.item.baseStats }));
+  //       }
+  //     });
+  //     console.log(cardsToGetValuesFrom);
+  //     for (let i = 0; i < cardsToGetValuesFrom.length; i++) {
+  //       // if(comparisionCards[i].item.)
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     getHighestValues(comparisionCards);
+  //     highlightHighestValues();
+  //   }, [comparisionCards]);
 
   const handleAdd = () => {
     setComparisionCards([
       ...comparisionCards,
-      { id: Math.round(Math.random() * 10000), item: null },
+      {
+        id: Math.round(Math.random() * 10000),
+        item: null,
+        highestValues: null,
+      },
     ]);
   };
 
@@ -65,6 +103,7 @@ export const CompareView = ({ pokemons }) => {
         {comparisionCards.map((comparisionCard) => {
           return (
             <PokemonCard
+              key={comparisionCard.id}
               setComparisionCards={setComparisionCards}
               comparisionCards={comparisionCards}
               getPokemon={getPokemon}

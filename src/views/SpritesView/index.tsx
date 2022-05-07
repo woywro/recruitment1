@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import React from 'react';
 import styled from 'styled-components';
 import { client } from '../../../apollo-client';
-import { Wrapper } from '../style';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { SpriteElement } from './components/SpriteElement';
 
 interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
@@ -30,7 +30,7 @@ export const SpritesView = ({ pokemonSpecies }) => {
     variables: { pokemon: pokemonSpecies },
   });
 
-  if (loading) return 'Loading...';
+  if (loading) return <LoadingSpinner />;
   if (error) return `Error! ${error.message}`;
 
   return (
@@ -48,4 +48,12 @@ export const SpritesView = ({ pokemonSpecies }) => {
 const SpritesWrapper = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 100%;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 `;

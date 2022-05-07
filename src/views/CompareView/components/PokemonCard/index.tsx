@@ -27,7 +27,10 @@ export const PokemonCard = ({
           id={comparisionCard.id}
         />
       ) : (
-        <PokemonDataCard item={comparisionCard.item} />
+        <PokemonDataCard
+          comparisionCard={comparisionCard}
+          comparisionCards={comparisionCards}
+        />
       )}
     </Slot>
   );
