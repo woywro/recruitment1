@@ -1,14 +1,9 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import type { Query } from '@favware/graphql-pokemon';
 import gql from 'graphql-tag';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../components/Button';
-import { Text } from '../../components/Text';
 import { PokemonCard } from './components/PokemonCard';
-import { PokemonChoiceCard } from './components/PokemonChoiceCard';
-import { PokemonDataCard } from './components/PokemonDataCard';
-import { getHighestValues } from '../../utils/getHighestValues';
 
 interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
   data: Record<K, Omit<Query[K], '__typename'>>;

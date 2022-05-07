@@ -3,7 +3,11 @@ import { gql } from '@apollo/client';
 import { PokemonView } from '../../views/PokemonView';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 
-export default function Pokemon({ pokemon }) {
+interface Props {
+  pokemon:
+}
+
+export default function Pokemon({ pokemon }: Props) {
   return pokemon !== undefined && <PokemonView pokemon={pokemon} />;
 }
 
@@ -20,7 +24,7 @@ export async function getStaticPaths() {
     1
   );
   return {
-    paths: pokemonsFiltered.map((species) => ({
+    paths: pokemonsFiltered.map((species: string) => ({
       params: {
         id: pokemonSpeciesFormatter(species),
       },

@@ -1,4 +1,3 @@
-import { PageWrapper } from '../style';
 import { List } from './components/List';
 
 interface Props {

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { SpinnerWrapper, StyledSpinner } from './style';
 export const LoadingSpinner = () => {
   return (

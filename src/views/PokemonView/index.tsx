@@ -11,7 +11,9 @@ import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
 
-export const PokemonView = ({ pokemon }) => {
+interface Props {}
+
+export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>

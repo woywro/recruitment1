@@ -2,7 +2,11 @@ import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 import { HomeView } from '../views/HomeView';
 
-export default function Home({ pokemons }) {
+interface Props {
+  pokemons: string[];
+}
+
+export default function Home({ pokemons }: Props) {
   return <HomeView pokemons={pokemons} />;
 }
 

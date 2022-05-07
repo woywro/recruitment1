@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Button } from '../Button';
-import { useCallback } from 'react';
+import React, { useEffect } from 'react';
 import {
-  MobileNavWrapper,
-  MobileNavItems,
-  MobileNavItem,
   CloseButton,
+  MobileNavItem,
+  MobileNavItems,
+  MobileNavWrapper,
 } from './style';
 
 interface Props {
@@ -28,14 +26,12 @@ export const MobileNav = ({ open, setOpen }: Props) => {
         <MobileNavItem
           isActive={router.pathname == '/' ? true : false}
           onClick={() => router.push('/')}
-          whileTap={{ scale: 0.9 }}
         >
           Home
         </MobileNavItem>
         <MobileNavItem
           isActive={router.pathname == '/compare' ? true : false}
           onClick={() => router.push('/compare')}
-          whileTap={{ scale: 0.9 }}
         >
           Compare
         </MobileNavItem>

@@ -14,10 +14,6 @@ export const MyDocument = () => {
           rel="stylesheet"
         />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-        />
-        <link
           href="http://fonts.cdnfonts.com/css/pokemon-solid"
           rel="stylesheet"
         ></link>

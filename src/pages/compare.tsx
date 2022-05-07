@@ -2,7 +2,11 @@ import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 import { CompareView } from '../views/CompareView';
 
-export default function Compare({ pokemons }) {
+interface Props {
+  pokemons: string[];
+}
+
+export default function Compare({ pokemons }: Props) {
   return <CompareView pokemons={pokemons} />;
 }
 

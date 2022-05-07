@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Item, Links, NavItemText } from './style';
 
 export const NavBar = () => {
   const router = useRouter();
-  const theme = useTheme();
 
   return (
     <Links>
