@@ -7,8 +7,8 @@ import { client } from '../../../apollo-client';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { SpriteElement } from './components/SpriteElement';
 
-interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
-  data: Record<K, Omit<Query[K], '__typename'>>;
+interface Props {
+  pokemonSpecies: string;
 }
 
 const GET_POKEMON_DETAILS = gql`
@@ -22,16 +22,13 @@ const GET_POKEMON_DETAILS = gql`
   }
 `;
 
-export const SpritesView = ({ pokemonSpecies }) => {
-  const { loading, error, data } = useQuery<
-    GraphQLPokemonResponse<'getPokemon'>
-  >(GET_POKEMON_DETAILS, {
+export const SpritesView = ({ pokemonSpecies }: Props) => {
+  const { loading, error, data } = useQuery(GET_POKEMON_DETAILS, {
     client: client,
     variables: { pokemon: pokemonSpecies },
   });
 
   if (loading) return <LoadingSpinner />;
-  if (error) return `Error! ${error.message}`;
 
   return (
     <Wrapper>

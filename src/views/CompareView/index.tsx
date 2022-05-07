@@ -1,13 +1,12 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import type { Query } from '@favware/graphql-pokemon';
 import gql from 'graphql-tag';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PokemonCard } from './components/PokemonCard';
-
-interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
-  data: Record<K, Omit<Query[K], '__typename'>>;
-}
+import { getHighestStats } from '../../utils/getHighestStats';
+import { PokemonChoiceCard } from './components/PokemonChoiceCard';
+import { PokemonDataCard } from './components/PokemonDataCard';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -43,70 +42,56 @@ const GET_POKEMON_DETAILS = gql`
 `;
 
 export const CompareView = ({ pokemons }) => {
-  const [comparisionCards, setComparisionCards] = useState([
-    { id: 1, item: null, highestValues: null },
-  ]);
+  const [comparedPokemons, setComparedPokemons] = useState([]);
+  const [comparisionListCard, setComparisionListCard] = useState([]);
+  const [highestStats, setHighestStats] = useState([]);
 
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
 
-  //   const getHighestValues = (comparisionCards) => {
-  //     const r = comparisionCards.map((card) => {
-  //       if (card.item !== null) {
-  //         return card.item.baseStats;
-  //       }
-  //     });
-  //     const final = {
-  //       hp: Math.max(...r.map((x) => x.hp)),
-  //       attack: Math.max(...r.map((x) => x.attack)),
-  //       defense: Math.max(...r.map((x) => x.defense)),
-  //     };
-  //     console.log(final);
-  //   };
-
-  //   const highlightHighestValues = () => {
-  //     const cardsToGetValuesFrom = [];
-  //     comparisionCards.map((card) => {
-  //       if (card.item !== null) {
-  //         cardsToGetValuesFrom.push(Object.entries({ ...card.item.baseStats }));
-  //       }
-  //     });
-  //     console.log(cardsToGetValuesFrom);
-  //     for (let i = 0; i < cardsToGetValuesFrom.length; i++) {
-  //       // if(comparisionCards[i].item.)
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getHighestValues(comparisionCards);
-  //     highlightHighestValues();
-  //   }, [comparisionCards]);
+  useEffect(() => {
+    const res = getHighestStats(comparedPokemons);
+    // setHighestStats(res);
+    comparedPokemons.map((pokemon) => {
+      pokemon.highestValues = [];
+      for (let i = 0; i < Object.values(pokemon.baseStats).length; i++) {
+        if (Object.values(pokemon.baseStats)[i] == Object.values(res)[i]) {
+          pokemon.highestValues.push(Object.keys(pokemon.baseStats)[i]);
+        }
+      }
+    });
+    console.log(comparedPokemons);
+  }, [comparedPokemons]);
 
   const handleAdd = () => {
-    setComparisionCards([
-      ...comparisionCards,
-      {
-        id: Math.round(Math.random() * 10000),
-        item: null,
-        highestValues: null,
-      },
-    ]);
+    setComparisionListCard([...comparisionListCard, {}]);
   };
 
   return (
     <>
       <CompareWrapper>
-        {comparisionCards.map((comparisionCard) => {
-          return (
-            <PokemonCard
-              key={comparisionCard.id}
-              setComparisionCards={setComparisionCards}
-              comparisionCards={comparisionCards}
-              getPokemon={getPokemon}
-              comparisionCard={comparisionCard}
-              pokemons={pokemons}
-            />
-          );
-        })}
+        {comparedPokemons.length !== 0 &&
+          comparedPokemons.map((comparisionCard) => {
+            return (
+              <PokemonDataCard
+                key={comparisionCard.id}
+                item={comparisionCard}
+                comparedPokemons={comparedPokemons}
+              />
+            );
+          })}
+        <>
+          {comparisionListCard.map((comparisionCard) => {
+            return (
+              <PokemonChoiceCard
+                pokemons={pokemons}
+                comparedPokemons={comparedPokemons}
+                setComparedPokemons={setComparedPokemons}
+                getPokemon={getPokemon}
+                id={comparisionCard.id}
+              />
+            );
+          })}
+        </>
         <AddSlotButton onClick={handleAdd}>Add +</AddSlotButton>
       </CompareWrapper>
     </>
@@ -120,48 +105,6 @@ const CompareWrapper = styled.div`
   overflow-x: scroll;
   display: flex;
   padding: 20px;
-`;
-
-const List = styled.div`
-  width: 100%;
-  overflow-y: scroll;
-  display: flex;
-  flex-flow: column;
-  jusitify-content: flex-start;
-  align-items: start;
-  padding: 10px;
-`;
-
-const ComparisionList = styled.div`
-  width: 100%;
-  overflow-y: scroll;
-  display: flex;
-  flex-flow: column;
-  jusitify-content: flex-start;
-  align-items: start;
-  padding: 10px;
-`;
-
-const ListItem = styled.div`
-  width: 100%;
-  padding: 5px;
-`;
-
-const Slot = styled.div`
-  width: 200px;
-  position: relative;
-  height: 100%;
-  box-shadow: ${(props) => props.theme.shadow};
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: scroll;
-  padding: 5px;
-  background: white;
-  margin: 10px;
-  border-radius: 20px;
-  flex: 0 0 auto;
 `;
 
 const AddSlotButton = styled.div`

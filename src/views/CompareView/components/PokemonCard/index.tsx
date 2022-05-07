@@ -5,31 +5,23 @@ import { PokemonChoiceCard } from '../PokemonChoiceCard';
 
 export const PokemonCard = ({
   pokemons,
-  comparisionCards,
-  setComparisionCards,
+  comparedPokemons,
+  setComparedPokemons,
   getPokemon,
   comparisionCard,
 }) => {
   const handleDeleteSlot = (e) => {
-    const itemsFiltered = comparisionCards.filter((x) => x.id !== e.id);
-    setComparisionCards(itemsFiltered);
+    const itemsFiltered = comparedPokemons.filter((x) => x.id !== e.id);
+    setComparedPokemons(itemsFiltered);
   };
 
   return (
     <Slot>
       <Button onClick={() => handleDeleteSlot(comparisionCard)}>remove</Button>
-      {comparisionCard.item == null ? (
-        <PokemonChoiceCard
-          pokemons={pokemons}
-          comparisionCards={comparisionCards}
-          setComparisionCards={setComparisionCards}
-          getPokemon={getPokemon}
-          id={comparisionCard.id}
-        />
-      ) : (
+      {comparisionCard.item !== null && (
         <PokemonDataCard
           comparisionCard={comparisionCard}
-          comparisionCards={comparisionCards}
+          comparedPokemons={comparedPokemons}
         />
       )}
     </Slot>

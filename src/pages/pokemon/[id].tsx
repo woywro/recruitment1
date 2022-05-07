@@ -4,7 +4,7 @@ import { PokemonView } from '../../views/PokemonView';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 
 interface Props {
-  pokemon:
+  // pokemon
 }
 
 export default function Pokemon({ pokemon }: Props) {

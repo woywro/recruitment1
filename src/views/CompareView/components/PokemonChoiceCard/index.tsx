@@ -2,12 +2,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
+import { getHighestStats } from '../../../../utils/getHighestStats';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
 
 export const PokemonChoiceCard = ({
   pokemons,
-  comparisionCards,
-  setComparisionCards,
+  comparedPokemons,
+  setComparedPokemons,
   getPokemon,
   id,
 }) => {
@@ -18,33 +19,56 @@ export const PokemonChoiceCard = ({
     getPokemon({
       variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
     }).then((res) => {
-      const createdSlot = comparisionCards.map((el) =>
-        el.id === id ? { ...el, item: res.data.getPokemon } : el
-      );
-      setComparisionCards(createdSlot);
+      // const createdSlot = comparedPokemons.map((el) =>
+      //   el.id === id ? { ...el, item: res.data.getPokemon } : el
+      // );
+      setComparedPokemons([
+        ...comparedPokemons,
+        { highestValues: [], ...res.data.getPokemon },
+      ]);
+      // console.log(createdSlot);
       setLoading(false);
     });
   };
 
   return (
-    <List>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        pokemons.map((pokemon: string) => {
-          return (
-            <ListItem
-              key={pokemon}
-              onClick={() => handleAddToComparision(id, pokemon)}
-            >
-              <Text>{pokemon}</Text>
-            </ListItem>
-          );
-        })
-      )}
-    </List>
+    <Wrapper>
+      <List>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          pokemons.map((pokemon: string) => {
+            return (
+              <ListItem
+                key={pokemon}
+                onClick={() => handleAddToComparision(id, pokemon)}
+              >
+                <Text>{pokemon}</Text>
+              </ListItem>
+            );
+          })
+        )}
+      </List>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  width: 200px;
+  position: relative;
+  height: 100%;
+  box-shadow: ${(props) => props.theme.shadow};
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+  padding: 5px;
+  background: white;
+  margin: 10px;
+  border-radius: 20px;
+  flex: 0 0 auto;
+`;
 
 const List = styled.div`
   width: 100%;
