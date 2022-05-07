@@ -4,6 +4,10 @@ import gql from 'graphql-tag';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';
+import { Text } from '../../components/Text';
+import { PokemonCard } from './components/PokemonCard';
+import { PokemonChoiceCard } from './components/PokemonChoiceCard';
+import { PokemonDataCard } from './components/PokemonDataCard';
 
 interface GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> {
   data: Record<K, Omit<Query[K], '__typename'>>;
@@ -43,65 +47,30 @@ const GET_POKEMON_DETAILS = gql`
 `;
 
 export const CompareView = ({ pokemons }) => {
-  const [comparisionSlots, setComparisionSlots] = useState([
+  const [comparisionCards, setComparisionCards] = useState([
     { id: 1, item: null },
   ]);
-  const [pokemonNames, setPokemonNames] = useState(pokemons);
-
-  useEffect(() => {
-    setPokemonNames(pokemons);
-  }, [pokemons]);
-
-  const handleAdd = () => {
-    setComparisionSlots([
-      ...comparisionSlots,
-      { id: Math.round(Math.random() * 1000), item: null },
-    ]);
-  };
-
-  const handleDeleteSlot = (e) => {
-    const itemsFiltered = comparisionSlots.filter((x) => x.id !== e.id);
-    setComparisionSlots(itemsFiltered);
-  };
-
-  const handleAddToComparision = (e, pokemon) => {
-    const res = comparisionSlots.map((el) =>
-      el.id === e.id ? { ...el, item: pokemon } : el
-    );
-    setComparisionSlots(res);
-    getPokemon({ variables: { pokemon: pokemon.toLowerCase() } });
-  };
-
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const handleAdd = () => {
+    setComparisionCards([
+      ...comparisionCards,
+      { id: Math.round(Math.random() * 10000), item: null },
+    ]);
+  };
 
   return (
     <>
       <CompareWrapper>
-        {comparisionSlots.map((e) => {
+        {comparisionCards.map((comparisionCard) => {
           return (
-            <Slot>
-              <Button onClick={() => handleDeleteSlot(e)}>remove</Button>
-              {/* <div>{e.id}</div> */}
-              {e.item == null ? (
-                <List>
-                  {pokemons.map((pokemon: string) => {
-                    return (
-                      <ListItem
-                        onClick={() => handleAddToComparision(e, pokemon)}
-                      >
-                        <Text>{pokemon}</Text>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              ) : (
-                <div>{e.item}</div>
-              )}
-            </Slot>
+            <PokemonCard
+              setComparisionCards={setComparisionCards}
+              comparisionCards={comparisionCards}
+              getPokemon={getPokemon}
+              comparisionCard={comparisionCard}
+              pokemons={pokemons}
+            />
           );
         })}
         <AddSlotButton onClick={handleAdd}>Add +</AddSlotButton>
@@ -120,6 +89,16 @@ const CompareWrapper = styled.div`
 `;
 
 const List = styled.div`
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-flow: column;
+  jusitify-content: flex-start;
+  align-items: start;
+  padding: 10px;
+`;
+
+const ComparisionList = styled.div`
   width: 100%;
   overflow-y: scroll;
   display: flex;

@@ -8,6 +8,16 @@ export default async function handler(req, res) {
   console.log(pokemon1);
   console.log(pokemon2);
 
+  //   const fetchedPokemon1 = await client.query({
+  //     query: gql`
+  //       query ($pokemon: PokemonEnum!) {
+  //         getFuzzyPokemon(pokemon: $pokemon) {
+  //           species
+  //           baseStatsTotal
+  //         }
+  //       }
+  //     `,
+  //   });
   const fetchedPokemon1 = await client.query({
     query: gql`
       query ($pokemon: PokemonEnum!) {
@@ -17,31 +27,34 @@ export default async function handler(req, res) {
         }
       }
     `,
+    variables: {
+      pokemon: 'dragonite',
+    },
   });
-  const fetchedPokemon2 = await client.query({
-    query: gql`
-      {
-        getFuzzyPokemon(pokemon: "dragonite") {
-          species
-          baseStatsTotal
-        }
-      }
-    `,
-  });
+  //   const fetchedPokemon2 = await client.query({
+  //     query: gql`
+  //       {
+  //         getFuzzyPokemon(pokemon: "dragonite") {
+  //           species
+  //           baseStatsTotal
+  //         }
+  //       }
+  //     `,
+  //   });
 
-  const pokemon1Stats = fetchedPokemon1.data.getFuzzyPokemon[0].baseStatsTotal;
-  const pokemon2Stats = fetchedPokemon2.data.getFuzzyPokemon[0].baseStatsTotal;
-  const chooseWinner = () => {
-    if (pokemon1Stats > pokemon2Stats) {
-      return pokemon1;
-    } else if (pokemon1Stats < pokemon2Stats) {
-      return pokemon2;
-    } else {
-      return pokemon1;
-    }
-  };
+  //   const pokemon1Stats = fetchedPokemon1.data;
+  //   const pokemon2Stats = fetchedPokemon2.data.getFuzzyPokemon[0].baseStatsTotal;
+  //   const chooseWinner = () => {
+  //     if (pokemon1Stats > pokemon2Stats) {
+  //       return pokemon1;
+  //     } else if (pokemon1Stats < pokemon2Stats) {
+  //       return pokemon2;
+  //     } else {
+  //       return pokemon1;
+  //     }
+  //   };
   console.log(pokemon1Stats);
-  console.log(pokemon2Stats);
+  //   console.log(pokemon2Stats);
   //   console.log(chooseWinner());
 
   res.end(`winner: ddd`);
