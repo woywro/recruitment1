@@ -7,17 +7,21 @@ export default function Home({ pokemons }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await client.query({
-    query: gql`
-      {
-        getAllPokemonSpecies
-      }
-    `,
-  });
+  try {
+    const { data } = await client.query({
+      query: gql`
+        {
+          getAllPokemonSpecies
+        }
+      `,
+    });
 
-  return {
-    props: {
-      pokemons: data.getAllPokemonSpecies,
-    },
-  };
+    return {
+      props: {
+        pokemons: data.getAllPokemonSpecies,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 }

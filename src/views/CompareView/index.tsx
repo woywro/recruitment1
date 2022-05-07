@@ -130,7 +130,7 @@ const Slot = styled.div`
   flex: 0 0 auto;
 `;
 
-const AddSlotButton = styled.button`
+const AddSlotButton = styled.div`
   width: 200px;
   height: 100%;
   box-shadow: ${(props) => props.theme.shadow};

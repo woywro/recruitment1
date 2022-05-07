@@ -10,13 +10,9 @@ export const MobileNavBar = () => {
   return (
     <MobileNavbarWrapper>
       <MenuButton>
-        <Button
-          size={25}
-          style={{ fill: 'white' }}
-          onClick={() => setOpen(!open)}
-        >
+        <div style={{ fill: 'white' }} onClick={() => setOpen(!open)}>
           M
-        </Button>
+        </div>
       </MenuButton>
       <MobileNav open={open} setOpen={setOpen} />
     </MobileNavbarWrapper>

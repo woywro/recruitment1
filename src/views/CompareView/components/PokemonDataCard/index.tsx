@@ -26,16 +26,6 @@ export const PokemonDataCard = ({ item }) => {
   );
 };
 
-const List = styled.div`
-  width: 100%;
-  overflow-y: scroll;
-  display: flex;
-  flex-flow: column;
-  jusitify-content: flex-start;
-  align-items: start;
-  padding: 10px;
-`;
-
 const ComparisionList = styled.div`
   width: 100%;
   overflow-y: scroll;
@@ -44,46 +34,4 @@ const ComparisionList = styled.div`
   jusitify-content: flex-start;
   align-items: start;
   padding: 10px;
-`;
-
-const ListItem = styled.div`
-  width: 100%;
-  padding: 5px;
-`;
-
-const Slot = styled.div`
-  width: 200px;
-  position: relative;
-  height: 100%;
-  box-shadow: ${(props) => props.theme.shadow};
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: scroll;
-  padding: 5px;
-  background: white;
-  margin: 10px;
-  border-radius: 20px;
-  flex: 0 0 auto;
-`;
-
-const AddSlotButton = styled.button`
-  width: 200px;
-  height: 100%;
-  box-shadow: ${(props) => props.theme.shadow};
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  overflow-y: scroll;
-  padding: 5px;
-  background: white;
-  margin: 10px;
-  border-radius: 20px;
-  flex: 0 0 auto;
-  cursor: pointer;
-  border: none;
-  font-size: 24px;
-  font-weight: bold;
 `;

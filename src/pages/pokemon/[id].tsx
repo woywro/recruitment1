@@ -4,7 +4,6 @@ import { PokemonView } from '../../views/PokemonView';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 
 export default function Pokemon({ pokemon }) {
-  console.log(pokemon);
   return pokemon !== undefined && <PokemonView pokemon={pokemon} />;
 }
 
@@ -33,8 +32,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const species = context.params.id.toString();
-  const { data } = await client.query({
-    query: gql`
+  try {
+    const { data } = await client.query({
+      query: gql`
       {
         getPokemon(pokemon: ${species}) {
           sprite
@@ -49,11 +49,14 @@ export async function getStaticProps(context) {
         }
       }
     `,
-  });
+    });
 
-  return {
-    props: {
-      pokemon: data.getPokemon,
-    },
-  };
+    return {
+      props: {
+        pokemon: data.getPokemon,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 }
