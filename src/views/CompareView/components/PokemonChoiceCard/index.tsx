@@ -3,12 +3,8 @@ import styled from 'styled-components';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
 import { hoverEffectBg } from '../../../../mixins/hoverEffects';
-import {
-  ComparedPokemonInterface,
-  PokemonInterface,
-} from '../../../../types/PokemonInterface';
+import { ComparedPokemonInterface } from '../../../../types/PokemonInterface';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
-import type { Query } from '@favware/graphql-pokemon';
 
 interface Props {
   pokemons: string[];
@@ -26,16 +22,23 @@ export const PokemonChoiceCard = ({
   const [loading, setLoading] = useState(false);
 
   const handleAddToComparision = (pokemon: string) => {
-    setLoading(true);
-    getPokemon({
-      variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
-    }).then((res) => {
-      setComparedPokemons([
-        ...comparedPokemons,
-        { highestValues: [], ...res.data.getPokemon },
-      ]);
-      setLoading(false);
+    const comparedPokemonsSpecies = comparedPokemons.map((e) => {
+      return e.species;
     });
+    if (comparedPokemonsSpecies.includes(pokemon)) {
+      alert('This pokemon is already on the list!');
+    } else {
+      setLoading(true);
+      getPokemon({
+        variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
+      }).then((res) => {
+        setComparedPokemons([
+          ...comparedPokemons,
+          { highestValues: [], ...res.data.getPokemon },
+        ]);
+        setLoading(false);
+      });
+    }
   };
 
   return (
@@ -62,7 +65,7 @@ export const PokemonChoiceCard = ({
 };
 
 const Wrapper = styled.div`
-  width: 200px;
+  width: auto;
   position: relative;
   height: 100%;
   box-shadow: ${(props) => props.theme.shadow};

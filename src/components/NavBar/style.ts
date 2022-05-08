@@ -9,6 +9,7 @@ export const Item = styled.div<{ isActive?: boolean }>`
   background: none;
   border: none;
   display: flex;
+  height: auto;
   justify-content: flex-start;
   align-items: center;
   position: relative;
@@ -34,8 +35,7 @@ export const Links = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px;
-  background: ${(props) => props.theme.colors.secondaryBg};
-  border-radius: 20px;
+  height: 70px;
   @media only screen and ${breakpoints.device.sm} {
     display: none;
   }

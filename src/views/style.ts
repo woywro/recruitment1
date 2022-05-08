@@ -13,11 +13,14 @@ export const PageWrapper = styled.div`
   }
 `;
 
-export const Wrapper = styled.div<{ width: string }>`
+export const Wrapper = styled.div`
   display: flex;
   padding: 10px;
   justify-content: center;
   align-items: center;
-  flex-flow: column;
-  width: ${(props) => (props.width ? props.width : '100%')};
+  width: 100%;
+  background: ${(props) => props.theme.colors.secondaryBg};
+  border-radius: 20px;
+  height: 100%;
+  overflow: auto;
 `;

@@ -7,6 +7,7 @@ import { client } from '../../../apollo-client';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { SpriteElement } from './components/SpriteElement';
+import { Wrapper } from '../style';
 
 interface Props {
   pokemonSpecies: string;
@@ -55,9 +56,9 @@ const SpritesWrapper = styled.ul`
   height: 100%;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-`;
+// const Wrapper = styled.div`
+//   display: flex;
+//   flex-flow: column;
+//   justify-content: center;
+//   align-items: center;
+// `;

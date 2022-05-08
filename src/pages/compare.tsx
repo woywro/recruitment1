@@ -1,6 +1,7 @@
 import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 import { CompareView } from '../views/CompareView';
+import { pokemonSpeciesFormatter } from '../utils/pokemonSpeciesFormatter';
 
 interface Props {
   pokemons: string[];
@@ -18,7 +19,11 @@ export async function getStaticProps() {
       }
     `,
   });
-  const allPokemonSpecies: string[] = data.getAllPokemonSpecies;
+  const allPokemonSpecies: string[] = data.getAllPokemonSpecies.map(
+    (species: string) => {
+      return pokemonSpeciesFormatter(species);
+    }
+  );
 
   return {
     props: {

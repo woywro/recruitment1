@@ -7,13 +7,13 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   background: ${(props) => props.theme.colors.gradient};
 `;
 
 export const ViewBox = styled.div`
   width: 80vw;
   height: 80vh;
+  position: relative;
   display: flex;
   justify-content: flex-start;
   flex-flow: column;

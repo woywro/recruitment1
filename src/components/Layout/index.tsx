@@ -14,8 +14,13 @@ export const Layout = ({ children }: Props) => {
       <ViewBox>
         <MobileNavBar />
         <NavBar />
-        <>{children}</>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
       </ViewBox>
     </Wrapper>
   );
 };
+
+const ChildrenWrapper = styled.div`
+  width: 100%;
+  height: calc(100% - (70px));
+`;

@@ -8,6 +8,7 @@ import {
   ComparedPokemonInterface,
 } from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
+import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
 
@@ -81,7 +82,7 @@ export const CompareView = ({ pokemons }: Props) => {
   }, [comparedPokemons]);
 
   return (
-    <>
+    <Wrapper>
       <CompareWrapper>
         {comparedPokemonsList.length !== 0 && (
           <ScrollSync>
@@ -108,7 +109,7 @@ export const CompareView = ({ pokemons }: Props) => {
           getPokemon={getPokemon}
         />
       </CompareWrapper>
-    </>
+    </Wrapper>
   );
 };
 

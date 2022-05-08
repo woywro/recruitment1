@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/Modal';
 import { Text } from '../../components/Text';
+import { hoverEffectBg } from '../../mixins/hoverEffects';
 import breakpoints from '../../theme/breakpoints';
 import { PokemonInterface } from '../../types/PokemonInterface';
 import { SpritesView } from '../SpritesView';
-import { PageWrapper } from '../style';
+import { PageWrapper, Wrapper } from '../style';
 import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
@@ -19,30 +20,36 @@ interface Props {
 export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <PageWrapper>
-      <Image
-        src={pokemon.sprite}
-        alt={pokemon.species}
-        width="150px"
-        height="150px"
-        placeholder="blur"
-        blurDataURL="/assets/placeholder.png"
-        loading="lazy"
-      ></Image>
-      <Text
-        style={{
-          fontFamily: "'Pokemon Solid', sans-serif",
-          fontSize: '40px',
-        }}
-      >
-        {pokemon.species}
-      </Text>
+    <Wrapper>
       <Grid>
+        <div style={{ gridArea: 'i' }}>
+          <div>
+            <Image
+              src={pokemon.sprite}
+              alt={pokemon.species}
+              width="150px"
+              height="150px"
+              placeholder="blur"
+              blurDataURL="/assets/placeholder.png"
+              loading="lazy"
+            ></Image>
+          </div>
+          <Text
+            style={{
+              fontFamily: "'Pokemon Solid', sans-serif",
+              fontSize: '40px',
+            }}
+          >
+            {pokemon.species}
+          </Text>
+        </div>
         <BasicInfo pokemon={pokemon} />
         <Abilities pokemon={pokemon} />
         <BaseStats pokemon={pokemon} />
+        <SpritesButton onClick={() => setIsOpen(true)}>
+          all available sprites
+        </SpritesButton>
       </Grid>
-      <Button onClick={() => setIsOpen(true)}>all available sprites</Button>
       <Modal
         title={'sprities'}
         handleClose={() => setIsOpen(false)}
@@ -50,30 +57,48 @@ export const PokemonView = ({ pokemon }: Props) => {
       >
         <SpritesView pokemonSpecies={pokemon.species} />
       </Modal>
-    </PageWrapper>
+    </Wrapper>
   );
 };
 
+const SpritesButton = styled.button`
+  background: white;
+  border-radius: 20px;
+  border:none;
+  cursor:pointer;
+  box-shadow: ${(props) => props.theme.shadow};
+  width:100%;
+  height:100%;
+  font-size: 30px;
+  background: ${(props) => props.theme.colors.primary}
+  grid-area: 'd';
+  :hover{
+    ${hoverEffectBg}
+  }
+`;
+
 const Grid = styled.div`
-  display: grid;
+  overflow-y: scroll;
   width: 100%;
   padding: 20px;
   height: 100%;
-  grid-template-areas:
-    'a b'
-    'c c';
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  display: grid;
   justify-items: center;
   align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'i i'
+    'a b'
+    'c d';
+  gap: 20px;
   @media only screen and ${breakpoints.device.sm} {
-    display: flex;
-    flex-flow: column;
-  }
-  @media only screen and ${breakpoints.device.lg} {
     grid-template-areas:
+      'i i'
       'a a'
       'b b'
-      'c c';
+      'c c'
+      'd d';
+  }
+  @media only screen and ${breakpoints.device.lg} {
   }
 `;

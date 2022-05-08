@@ -10,11 +10,9 @@ export const Abilities = ({ pokemon }: Props) => {
   return (
     <Wrapper>
       <Text size={'big'}>Abilities</Text>
-      <Row>
-        <Text>first: {pokemon.abilities.first}</Text>
-        <Text>second: {pokemon.abilities.second}</Text>
-        <Text>hidden: {pokemon.abilities.hidden}</Text>
-      </Row>
+      <Text>first: {pokemon.abilities.first}</Text>
+      <Text>second: {pokemon.abilities.second}</Text>
+      <Text>hidden: {pokemon.abilities.hidden}</Text>
     </Wrapper>
   );
 };
@@ -28,11 +26,4 @@ const Wrapper = styled.div`
   grid-area: c;
   height: 100%;
   width: 100%;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
 `;
