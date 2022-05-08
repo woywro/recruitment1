@@ -8,30 +8,32 @@ export default async function handler(req, res) {
   console.log(pokemon1);
   console.log(pokemon2);
 
-  const fetchedPokemon1 = await client.query({
-    query: gql`
-      {
-        getFuzzyPokemon(pokemon: "bulbasaur") {
-          species
-          baseStatsTotal
-        }
+  const getPokemon = gql`
+    query ($pokemon: String!) {
+      getFuzzyPokemon(pokemon: $pokemon) {
+        species
+        baseStatsTotal
       }
-    `,
+    }
+  `;
+
+  const fetchedPokemon1 = await client.query({
+    query: getPokemon,
+    variables: {
+      pokemon: pokemon1,
+    },
   });
 
   const fetchedPokemon2 = await client.query({
-    query: gql`
-      {
-        getFuzzyPokemon(pokemon: "dragonite") {
-          species
-          baseStatsTotal
-        }
-      }
-    `,
+    query: getPokemon,
+    variables: {
+      pokemon: pokemon2,
+    },
   });
 
   const pokemon1Stats = fetchedPokemon1.data.getFuzzyPokemon[0].baseStatsTotal;
   const pokemon2Stats = fetchedPokemon2.data.getFuzzyPokemon[0].baseStatsTotal;
+
   const chooseWinner = () => {
     if (pokemon1Stats > pokemon2Stats) {
       return pokemon1;
