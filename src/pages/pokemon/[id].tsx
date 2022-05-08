@@ -23,10 +23,10 @@ export async function getStaticPaths() {
   const paths = data.getAllPokemonSpecies.map((species: string) => {
     return pokemonSpeciesFormatter(species);
   });
-  const all = paths.map((e) => {
+  const all = paths.map((e: string) => {
     return { params: { id: e !== undefined ? e : '404' } };
   });
-  console.log(all);
+  // console.log(all);
 
   return {
     paths: all,

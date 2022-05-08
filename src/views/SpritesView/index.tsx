@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import React from 'react';
 import styled from 'styled-components';
 import { client } from '../../../apollo-client';
+import { ErrorMessage } from '../../components/ErrorMessage';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { SpriteElement } from './components/SpriteElement';
 
@@ -32,12 +33,18 @@ export const SpritesView = ({ pokemonSpecies }: Props) => {
 
   return (
     <Wrapper>
-      <SpritesWrapper>
-        <SpriteElement sprite={data.getPokemon.sprite} />
-        <SpriteElement sprite={data.getPokemon.shinySprite} />
-        <SpriteElement sprite={data.getPokemon.backSprite} />
-        <SpriteElement sprite={data.getPokemon.shinyBackSprite} />
-      </SpritesWrapper>
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <ErrorMessage msg={'An error occured!'} />
+      ) : (
+        <SpritesWrapper>
+          <SpriteElement sprite={data.getPokemon.sprite} />
+          <SpriteElement sprite={data.getPokemon.shinySprite} />
+          <SpriteElement sprite={data.getPokemon.backSprite} />
+          <SpriteElement sprite={data.getPokemon.shinyBackSprite} />
+        </SpritesWrapper>
+      )}
     </Wrapper>
   );
 };

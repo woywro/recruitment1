@@ -23,6 +23,9 @@ export const PokemonView = ({ pokemon }: Props) => {
           alt={pokemon.species}
           width="150px"
           height="150px"
+          placeholder="blur"
+          blurDataURL="/assets/placeholder.png"
+          loading="lazy"
         ></Image>
         <Text
           style={{

@@ -18,10 +18,11 @@ export async function getStaticProps() {
       }
     `,
   });
+  const allPokemonSpecies: string[] = data.getAllPokemonSpecies;
 
   return {
     props: {
-      pokemons: [...new Set(data.getAllPokemonSpecies)],
+      pokemons: [...new Set(allPokemonSpecies)],
     },
   };
 }

@@ -8,7 +8,15 @@ interface Props {
 export const SpriteElement = ({ sprite }: Props) => {
   return (
     <Wrapper>
-      <Image src={sprite} alt={sprite} width="150px" height="150px" />
+      <Image
+        src={sprite}
+        alt={sprite}
+        width="150px"
+        height="150px"
+        placeholder="blur"
+        blurDataURL="/assets/placeholder.png"
+        loading="lazy"
+      />
     </Wrapper>
   );
 };

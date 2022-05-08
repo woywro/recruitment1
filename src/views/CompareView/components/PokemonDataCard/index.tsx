@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button } from '../../../../components/Button';
 import { Text } from '../../../../components/Text';
 import { PokemonInterface } from '../../../../types/PokemonInterface';
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
 interface Props {
   item: PokemonInterface;
@@ -46,68 +47,70 @@ export const PokemonDataCard = ({
   const Gender = FormData(item.gender);
 
   return (
-    <Wrapper>
-      <Button onClick={() => handleDeleteFromComparision(item.species)}>
-        remove
-      </Button>
-      <ComparisionList>
-        <Section>
-          <Text
-            style={{
-              fontFamily: "'Pokemon Solid', sans-serif",
-              fontSize: '40px',
-            }}
-          >
-            {item.species}
-          </Text>
-          <CompareText>
-            <Text bold={true}>{'species'}: </Text>
-            <Text>{item.species}</Text>
-          </CompareText>
-          <CompareText>
-            <Text bold={true}>{'types'}: </Text>
-            <Text>{item.types}</Text>
-          </CompareText>
-        </Section>
-        <Section>
-          <Title size={'big'}>Abilities</Title>
-          {Abilities.map((ability) => {
-            return (
-              <CompareText>
-                <Text bold={true}>{ability.key}: </Text>
-                <Text>{ability.value}</Text>
-              </CompareText>
-            );
-          })}
-        </Section>
-        <Section>
-          <Title size={'big'}>Stats</Title>
-          {Stats.map((stat) => {
-            return (
-              <CompareText
-                isHighlighted={
-                  item.highestValues.includes(stat.key) ? true : false
-                }
-              >
-                <Text bold={true}>{stat.key}: </Text>
-                <Text>{stat.value}</Text>
-              </CompareText>
-            );
-          })}
-        </Section>
-        <Section>
-          <Title size={'big'}>Gender</Title>
-          {Gender.map((gender) => {
-            return (
-              <CompareText>
-                <Text bold={true}>{gender.key}: </Text>
-                <Text>{gender.value}</Text>
-              </CompareText>
-            );
-          })}
-        </Section>
-      </ComparisionList>
-    </Wrapper>
+    <ScrollSyncPane>
+      <Wrapper>
+        <Button onClick={() => handleDeleteFromComparision(item.species)}>
+          remove
+        </Button>
+        <ComparisionList>
+          <Section>
+            <Text
+              style={{
+                fontFamily: "'Pokemon Solid', sans-serif",
+                fontSize: '40px',
+              }}
+            >
+              {item.species}
+            </Text>
+            <CompareText>
+              <Text bold={true}>{'species'}: </Text>
+              <Text>{item.species}</Text>
+            </CompareText>
+            <CompareText>
+              <Text bold={true}>{'types'}: </Text>
+              <Text>{item.types}</Text>
+            </CompareText>
+          </Section>
+          <Section>
+            <Title size={'big'}>Abilities</Title>
+            {Abilities.map((ability) => {
+              return (
+                <CompareText>
+                  <Text bold={true}>{ability.key}: </Text>
+                  <Text>{ability.value}</Text>
+                </CompareText>
+              );
+            })}
+          </Section>
+          <Section>
+            <Title size={'big'}>Stats</Title>
+            {Stats.map((stat) => {
+              return (
+                <CompareText
+                  isHighlighted={
+                    item.highestValues.includes(stat.key) ? true : false
+                  }
+                >
+                  <Text bold={true}>{stat.key}: </Text>
+                  <Text>{stat.value}</Text>
+                </CompareText>
+              );
+            })}
+          </Section>
+          <Section>
+            <Title size={'big'}>Gender</Title>
+            {Gender.map((gender) => {
+              return (
+                <CompareText>
+                  <Text bold={true}>{gender.key}: </Text>
+                  <Text>{gender.value}</Text>
+                </CompareText>
+              );
+            })}
+          </Section>
+        </ComparisionList>
+      </Wrapper>
+    </ScrollSyncPane>
   );
 };
 

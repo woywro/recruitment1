@@ -8,6 +8,7 @@ import { getHighestStats } from '../../utils/getHighestStats';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+import { PokemonInterface } from '../../types/PokemonInterface';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -72,26 +73,20 @@ export const CompareView = ({ pokemons }) => {
     highlightStats();
   }, [comparedPokemons]);
 
-  const handleAdd = () => {
-    setComparisionListCard([...comparisionListCard, {}]);
-  };
-
   return (
     <>
       <CompareWrapper>
         {comparedPokemonsList.length !== 0 && (
           <ScrollSync>
             <>
-              {comparedPokemonsList.map((comparisionCard) => {
+              {comparedPokemonsList.map((comparedPokemon: PokemonInterface) => {
                 return (
-                  <ScrollSyncPane>
-                    <PokemonDataCard
-                      key={comparisionCard.id}
-                      item={comparisionCard}
-                      comparedPokemons={comparedPokemons}
-                      setComparedPokemons={setComparedPokemons}
-                    />
-                  </ScrollSyncPane>
+                  <PokemonDataCard
+                    key={comparedPokemon.species}
+                    item={comparedPokemon}
+                    comparedPokemons={comparedPokemons}
+                    setComparedPokemons={setComparedPokemons}
+                  />
                 );
               })}
             </>

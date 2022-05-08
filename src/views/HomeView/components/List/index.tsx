@@ -11,8 +11,11 @@ export const List = ({ pokemons }: Props) => {
   return (
     <ListWrapper>
       {pokemons.map((pokemon) => (
-        <Link href={`pokemon/${pokemonSpeciesFormatter(pokemon)}`}>
-          <PokemonListItem key={pokemon}>{pokemon}</PokemonListItem>
+        <Link
+          key={pokemon}
+          href={`pokemon/${pokemonSpeciesFormatter(pokemon)}`}
+        >
+          <PokemonListItem>{pokemon}</PokemonListItem>
         </Link>
       ))}
     </ListWrapper>
