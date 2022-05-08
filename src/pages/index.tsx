@@ -22,7 +22,7 @@ export async function getStaticProps() {
 
     return {
       props: {
-        pokemons: data.getAllPokemonSpecies,
+        pokemons: [...new Set(data.getAllPokemonSpecies)],
       },
     };
   } catch (err) {

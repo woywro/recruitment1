@@ -1,21 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../../components/Button';
 import { Text } from '../../../../components/Text';
+import { PokemonInterface } from '../../../../types/PokemonInterface';
+
+interface Props {
+  item: PokemonInterface;
+  comparedPokemons: any;
+  setComparedPokemons: any;
+}
 
 export const PokemonDataCard = ({
   item,
   comparedPokemons,
   setComparedPokemons,
-}) => {
-  const handleDeleteSlot = (species) => {
-    const itemsFiltered = comparedPokemons.filter(
-      (pokemon) => pokemon.species !== species
-    );
-    setComparedPokemons(itemsFiltered);
-  };
+}: Props) => {
+  const handleDeleteFromComparision = useCallback(
+    (species: string) => {
+      const itemsFiltered = comparedPokemons.filter(
+        (pokemon: PokemonInterface) => pokemon.species !== species
+      );
+      setComparedPokemons(itemsFiltered);
+    },
+    [item]
+  );
 
-  const FormData = (property) => {
+  const FormData = (property: {}) => {
     const returnData = Object.entries(property)
       .filter((e) => !e.includes('__typename'))
       .map(([key, value]) => {
@@ -37,7 +47,9 @@ export const PokemonDataCard = ({
 
   return (
     <Wrapper>
-      <Button onClick={() => handleDeleteSlot(item.species)}>remove</Button>
+      <Button onClick={() => handleDeleteFromComparision(item.species)}>
+        remove
+      </Button>
       <ComparisionList>
         <Section>
           <Text
