@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
 `;
 
 export const ViewBox = styled.div`
-  width: 70vw;
-  height: 70vh;
+  width: 80vw;
+  height: 80vh;
   display: flex;
   justify-content: flex-start;
   flex-flow: column;

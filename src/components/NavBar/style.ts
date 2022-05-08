@@ -4,7 +4,7 @@ import breakpoints from '../../theme/breakpoints';
 export const Item = styled.div<{ isActive?: boolean }>`
   text-decoration: none;
   color: black;
-  padding: 10px;
+  padding: 5px 20px;
   font-size: 24px;
   background: none;
   border: none;
@@ -33,7 +33,9 @@ export const Links = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+  background: ${(props) => props.theme.colors.secondaryBg};
+  border-radius: 20px;
   @media only screen and ${breakpoints.device.sm} {
     display: none;
   }

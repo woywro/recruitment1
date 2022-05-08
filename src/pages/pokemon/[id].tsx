@@ -19,12 +19,9 @@ export async function getStaticPaths() {
       }
     `,
   });
-  const pokemonsFiltered = data.getAllPokemonSpecies.slice(
-    data.getAllPokemonSpecies.indexOf('type:null'),
-    1
-  );
+
   return {
-    paths: pokemonsFiltered.map((species: string) => ({
+    paths: data.getAllPokemonSpecies.map((species: string) => ({
       params: {
         id: pokemonSpeciesFormatter(species),
       },

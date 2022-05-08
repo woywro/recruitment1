@@ -1,11 +1,25 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Button } from '../../../../components/Button';
+import { Text } from '../../../../components/Text';
 
-export const PokemonDataCard = ({ item, comparedPokemons }) => {
+export const PokemonDataCard = ({
+  item,
+  comparedPokemons,
+  setComparedPokemons,
+}) => {
+  const handleDeleteSlot = (species) => {
+    const itemsFiltered = comparedPokemons.filter(
+      (pokemon) => pokemon.species !== species
+    );
+    setComparedPokemons(itemsFiltered);
+  };
+
   return (
     <Wrapper>
+      <Button onClick={() => handleDeleteSlot(item.species)}>remove</Button>
       <ComparisionList>
-        <CompareText>{item.species}</CompareText>
+        <CompareText size={'big'}>{item.species}</CompareText>
         {/* <CompareText isHighest={()=>statsHighLighter(item)}>{item.types}</CompareText> */}
         <CompareText>{item.abilities.first}</CompareText>
         <CompareText>{item.abilities.second}</CompareText>
@@ -83,7 +97,9 @@ const ComparisionList = styled.div`
   padding: 10px;
 `;
 
-const CompareText = styled.p<{ isHighlighted: boolean }>`
-  font-size: 18px;
-  background: ${(props) => (props.isHighlighted ? 'red' : 'none')};
+const CompareText = styled(Text)<{ isHighlighted: boolean }>`
+  padding: 2px;
+  background: ${(props) => (props.isHighlighted ? '#abff32' : 'none')};
+  border-radius: 10px;
+  margin: 2px;
 `;

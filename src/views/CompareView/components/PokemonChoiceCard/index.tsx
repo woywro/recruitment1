@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
+import { hoverEffectBg } from '../../../../mixins/hoverEffects';
 import { getHighestStats } from '../../../../utils/getHighestStats';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
 
@@ -10,29 +11,25 @@ export const PokemonChoiceCard = ({
   comparedPokemons,
   setComparedPokemons,
   getPokemon,
-  id,
 }) => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddToComparision = (id, pokemon) => {
+  const handleAddToComparision = (pokemon) => {
     setLoading(true);
     getPokemon({
       variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
     }).then((res) => {
-      // const createdSlot = comparedPokemons.map((el) =>
-      //   el.id === id ? { ...el, item: res.data.getPokemon } : el
-      // );
       setComparedPokemons([
         ...comparedPokemons,
         { highestValues: [], ...res.data.getPokemon },
       ]);
-      // console.log(createdSlot);
       setLoading(false);
     });
   };
 
   return (
     <Wrapper>
+      <Text bold={true}>Choose from list</Text>
       <List>
         {loading ? (
           <LoadingSpinner />
@@ -41,7 +38,7 @@ export const PokemonChoiceCard = ({
             return (
               <ListItem
                 key={pokemon}
-                onClick={() => handleAddToComparision(id, pokemon)}
+                onClick={() => handleAddToComparision(pokemon)}
               >
                 <Text>{pokemon}</Text>
               </ListItem>
@@ -85,4 +82,8 @@ const List = styled.div`
 const ListItem = styled.div`
   width: 100%;
   padding: 5px;
+  cursor: pointer;
+  :hover {
+    ${hoverEffectBg}
+  }
 `;

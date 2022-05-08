@@ -5,6 +5,7 @@ export const pokemonSpeciesFormatter = (species: string) => {
     .replaceAll('-', '')
     .replaceAll('.', '')
     .replaceAll("'", '')
-    .replaceAll('%', '');
+    .replaceAll('%', '')
+    .replaceAll('type:null', '');
   return speciesFormatted;
 };

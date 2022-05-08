@@ -43,15 +43,19 @@ const GET_POKEMON_DETAILS = gql`
 
 export const CompareView = ({ pokemons }) => {
   const [comparedPokemons, setComparedPokemons] = useState([]);
+  const [comparedPokemonsList, setComparedPokemonsList] = useState([]);
   const [comparisionListCard, setComparisionListCard] = useState([]);
   const [highestStats, setHighestStats] = useState([]);
 
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
 
-  useEffect(() => {
+  const highlightStats = () => {
     const res = getHighestStats(comparedPokemons);
     // setHighestStats(res);
-    comparedPokemons.map((pokemon) => {
+    const comparedPokemonsDeepCopy = JSON.parse(
+      JSON.stringify(comparedPokemons)
+    );
+    comparedPokemonsDeepCopy.map((pokemon) => {
       pokemon.highestValues = [];
       for (let i = 0; i < Object.values(pokemon.baseStats).length; i++) {
         if (Object.values(pokemon.baseStats)[i] == Object.values(res)[i]) {
@@ -59,7 +63,12 @@ export const CompareView = ({ pokemons }) => {
         }
       }
     });
-    console.log(comparedPokemons);
+    setComparedPokemonsList(comparedPokemonsDeepCopy);
+    console.log(comparedPokemonsDeepCopy);
+  };
+
+  useEffect(() => {
+    highlightStats();
   }, [comparedPokemons]);
 
   const handleAdd = () => {
@@ -69,30 +78,23 @@ export const CompareView = ({ pokemons }) => {
   return (
     <>
       <CompareWrapper>
-        {comparedPokemons.length !== 0 &&
-          comparedPokemons.map((comparisionCard) => {
+        {comparedPokemonsList.length !== 0 &&
+          comparedPokemonsList.map((comparisionCard) => {
             return (
               <PokemonDataCard
                 key={comparisionCard.id}
                 item={comparisionCard}
                 comparedPokemons={comparedPokemons}
-              />
-            );
-          })}
-        <>
-          {comparisionListCard.map((comparisionCard) => {
-            return (
-              <PokemonChoiceCard
-                pokemons={pokemons}
-                comparedPokemons={comparedPokemons}
                 setComparedPokemons={setComparedPokemons}
-                getPokemon={getPokemon}
-                id={comparisionCard.id}
               />
             );
           })}
-        </>
-        <AddSlotButton onClick={handleAdd}>Add +</AddSlotButton>
+        <PokemonChoiceCard
+          pokemons={pokemons}
+          comparedPokemons={comparedPokemons}
+          setComparedPokemons={setComparedPokemons}
+          getPokemon={getPokemon}
+        />
       </CompareWrapper>
     </>
   );
