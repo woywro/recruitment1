@@ -15,63 +15,101 @@ export const PokemonDataCard = ({
     setComparedPokemons(itemsFiltered);
   };
 
+  const FormData = (property) => {
+    const returnData = Object.entries(property)
+      .filter((e) => !e.includes('__typename'))
+      .map(([key, value]) => {
+        const formattedValue = () => {
+          if (value == null) {
+            return '-';
+          } else {
+            return value;
+          }
+        };
+        return { key, value: formattedValue() };
+      });
+    return returnData;
+  };
+
+  const Abilities = FormData(item.abilities);
+  const Stats = FormData(item.baseStats);
+  const Gender = FormData(item.gender);
+
   return (
     <Wrapper>
       <Button onClick={() => handleDeleteSlot(item.species)}>remove</Button>
       <ComparisionList>
-        <CompareText size={'big'}>{item.species}</CompareText>
-        {/* <CompareText isHighest={()=>statsHighLighter(item)}>{item.types}</CompareText> */}
-        <CompareText>{item.abilities.first}</CompareText>
-        <CompareText>{item.abilities.second}</CompareText>
-        <CompareText>{item.abilities.hidden}</CompareText>
-        <CompareText
-          isHighlighted={item.highestValues.includes('hp') ? true : false}
-        >
-          {item.baseStats.hp}
-        </CompareText>
-        <CompareText
-          isHighlighted={item.highestValues.includes('attack') ? true : false}
-        >
-          {item.baseStats.attack}
-        </CompareText>
-        <CompareText
-          isHighlighted={item.highestValues.includes('defense') ? true : false}
-        >
-          {item.baseStats.defense}
-        </CompareText>
-        <CompareText
-          isHighlighted={
-            item.highestValues.includes('specialattack') ? true : false
-          }
-        >
-          {item.baseStats.specialattack}
-        </CompareText>
-        <CompareText
-          isHighlighted={
-            item.highestValues.includes('specialdefense') ? true : false
-          }
-        >
-          {item.baseStats.specialdefense}
-        </CompareText>
-        <CompareText
-          isHighlighted={item.highestValues.includes('speed') ? true : false}
-        >
-          {item.baseStats.speed}
-        </CompareText>
-        <CompareText>{item.gender.male}</CompareText>
-        <CompareText>{item.gender.female}</CompareText>
-        <CompareText>{item.gender.height}</CompareText>
-        <CompareText>{item.gender.sprite}</CompareText>
-        <CompareText>{item.gender.shinySprite}</CompareText>
-        <CompareText>{item.gender.backSprite}</CompareText>
-        <CompareText>{item.gender.shinyBackSprite}</CompareText>
+        <Section>
+          <Text
+            style={{
+              fontFamily: "'Pokemon Solid', sans-serif",
+              fontSize: '40px',
+            }}
+          >
+            {item.species}
+          </Text>
+          <CompareText>
+            <Text bold={true}>{'species'}: </Text>
+            <Text>{item.species}</Text>
+          </CompareText>
+          <CompareText>
+            <Text bold={true}>{'types'}: </Text>
+            <Text>{item.types}</Text>
+          </CompareText>
+        </Section>
+        <Section>
+          <Title size={'big'}>Abilities</Title>
+          {Abilities.map((ability) => {
+            return (
+              <CompareText>
+                <Text bold={true}>{ability.key}: </Text>
+                <Text>{ability.value}</Text>
+              </CompareText>
+            );
+          })}
+        </Section>
+        <Section>
+          <Title size={'big'}>Stats</Title>
+          {Stats.map((stat) => {
+            return (
+              <CompareText
+                isHighlighted={
+                  item.highestValues.includes(stat.key) ? true : false
+                }
+              >
+                <Text bold={true}>{stat.key}: </Text>
+                <Text>{stat.value}</Text>
+              </CompareText>
+            );
+          })}
+        </Section>
+        <Section>
+          <Title size={'big'}>Gender</Title>
+          {Gender.map((gender) => {
+            return (
+              <CompareText>
+                <Text bold={true}>{gender.key}: </Text>
+                <Text>{gender.value}</Text>
+              </CompareText>
+            );
+          })}
+        </Section>
       </ComparisionList>
     </Wrapper>
   );
 };
 
+const Title = styled(Text)`
+  border-bottom: 2px solid ${(props) => props.theme.colors.primary};
+  margin: 5px;
+`;
+
+const Section = styled.div`
+  background: white;
+`;
+
 const Wrapper = styled.div`
-  width: 200px;
+  min-width: 200px;
   position: relative;
   height: 100%;
   box-shadow: ${(props) => props.theme.shadow};
@@ -79,7 +117,7 @@ const Wrapper = styled.div`
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  overflow-y: scroll;
+  overflow: auto;
   padding: 5px;
   background: white;
   margin: 10px;
@@ -89,7 +127,7 @@ const Wrapper = styled.div`
 
 const ComparisionList = styled.div`
   width: 100%;
-  overflow-y: scroll;
+
   display: flex;
   flex-flow: column;
   jusitify-content: flex-start;
@@ -97,8 +135,10 @@ const ComparisionList = styled.div`
   padding: 10px;
 `;
 
-const CompareText = styled(Text)<{ isHighlighted: boolean }>`
+const CompareText = styled.div<{ isHighlighted?: boolean }>`
   padding: 2px;
+  display: flex;
+  flex-flow: row;
   background: ${(props) => (props.isHighlighted ? '#abff32' : 'none')};
   border-radius: 10px;
   margin: 2px;

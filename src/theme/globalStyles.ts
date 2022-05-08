@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { ThemeInterface } from "../types/ThemeInterface";
+import { createGlobalStyle } from 'styled-components';
+import { ThemeInterface } from '../types/ThemeInterface';
 
 export const GlobalStyles = createGlobalStyle<{ theme: ThemeInterface }>`
 *{

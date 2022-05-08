@@ -24,6 +24,7 @@ export const PokemonChoiceCard = ({
         { highestValues: [], ...res.data.getPokemon },
       ]);
       setLoading(false);
+      console.log(res.data.getPokemon);
     });
   };
 

@@ -7,6 +7,7 @@ import { PokemonCard } from './components/PokemonCard';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -45,7 +46,7 @@ export const CompareView = ({ pokemons }) => {
   const [comparedPokemons, setComparedPokemons] = useState([]);
   const [comparedPokemonsList, setComparedPokemonsList] = useState([]);
   const [comparisionListCard, setComparisionListCard] = useState([]);
-  const [highestStats, setHighestStats] = useState([]);
+  // const [highestStats, setHighestStats] = useState([]);
 
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
 
@@ -78,17 +79,24 @@ export const CompareView = ({ pokemons }) => {
   return (
     <>
       <CompareWrapper>
-        {comparedPokemonsList.length !== 0 &&
-          comparedPokemonsList.map((comparisionCard) => {
-            return (
-              <PokemonDataCard
-                key={comparisionCard.id}
-                item={comparisionCard}
-                comparedPokemons={comparedPokemons}
-                setComparedPokemons={setComparedPokemons}
-              />
-            );
-          })}
+        {comparedPokemonsList.length !== 0 && (
+          <ScrollSync>
+            <>
+              {comparedPokemonsList.map((comparisionCard) => {
+                return (
+                  <ScrollSyncPane>
+                    <PokemonDataCard
+                      key={comparisionCard.id}
+                      item={comparisionCard}
+                      comparedPokemons={comparedPokemons}
+                      setComparedPokemons={setComparedPokemons}
+                    />
+                  </ScrollSyncPane>
+                );
+              })}
+            </>
+          </ScrollSync>
+        )}
         <PokemonChoiceCard
           pokemons={pokemons}
           comparedPokemons={comparedPokemons}
