@@ -2,17 +2,25 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../../components/Button';
 import { Text } from '../../../../components/Text';
-import { PokemonInterface } from '../../../../types/PokemonInterface';
+import {
+  ComparedPokemonInterface,
+  PokemonInterface,
+} from '../../../../types/PokemonInterface';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
+interface DataInterface {
+  key: string;
+  value: string;
+}
+
 interface Props {
-  item: PokemonInterface;
-  comparedPokemons: any;
-  setComparedPokemons: any;
+  comparedPokemon: ComparedPokemonInterface;
+  comparedPokemons: ComparedPokemonInterface[];
+  setComparedPokemons: (arg0: ComparedPokemonInterface[]) => void;
 }
 
 export const PokemonDataCard = ({
-  item,
+  comparedPokemon,
   comparedPokemons,
   setComparedPokemons,
 }: Props) => {
@@ -23,14 +31,14 @@ export const PokemonDataCard = ({
       );
       setComparedPokemons(itemsFiltered);
     },
-    [item]
+    [comparedPokemon]
   );
 
   const FormData = (property: {}) => {
-    const returnData = Object.entries(property)
+    const returnData: DataInterface[] = Object.entries(property)
       .filter((e) => !e.includes('__typename'))
       .map(([key, value]) => {
-        const formattedValue = () => {
+        const formattedValue = (): string => {
           if (value == null) {
             return '-';
           } else {
@@ -42,14 +50,16 @@ export const PokemonDataCard = ({
     return returnData;
   };
 
-  const Abilities = FormData(item.abilities);
-  const Stats = FormData(item.baseStats);
-  const Gender = FormData(item.gender);
+  const Abilities: DataInterface[] = FormData(comparedPokemon.abilities);
+  const Stats: DataInterface[] = FormData(comparedPokemon.baseStats);
+  const Gender: DataInterface[] = FormData(comparedPokemon.gender);
 
   return (
     <ScrollSyncPane>
       <Wrapper>
-        <Button onClick={() => handleDeleteFromComparision(item.species)}>
+        <Button
+          onClick={() => handleDeleteFromComparision(comparedPokemon.species)}
+        >
           remove
         </Button>
         <ComparisionList>
@@ -60,15 +70,15 @@ export const PokemonDataCard = ({
                 fontSize: '40px',
               }}
             >
-              {item.species}
+              {comparedPokemon.species}
             </Text>
             <CompareText>
               <Text bold={true}>{'species'}: </Text>
-              <Text>{item.species}</Text>
+              <Text>{comparedPokemon.species}</Text>
             </CompareText>
             <CompareText>
               <Text bold={true}>{'types'}: </Text>
-              <Text>{item.types}</Text>
+              <Text>{comparedPokemon.types}</Text>
             </CompareText>
           </Section>
           <Section>
@@ -88,7 +98,9 @@ export const PokemonDataCard = ({
               return (
                 <CompareText
                   isHighlighted={
-                    item.highestValues.includes(stat.key) ? true : false
+                    comparedPokemon.highestValues.includes(stat.key)
+                      ? true
+                      : false
                   }
                 >
                   <Text bold={true}>{stat.key}: </Text>

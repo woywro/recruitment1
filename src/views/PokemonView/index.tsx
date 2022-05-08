@@ -5,50 +5,51 @@ import { Button } from '../../components/Button';
 import { Modal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import breakpoints from '../../theme/breakpoints';
+import { PokemonInterface } from '../../types/PokemonInterface';
 import { SpritesView } from '../SpritesView';
-import { PageWrapper, Wrapper } from '../style';
+import { PageWrapper } from '../style';
 import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
 
-interface Props {}
+interface Props {
+  pokemon: PokemonInterface;
+}
 
 export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <PageWrapper>
-      <Wrapper>
-        <Image
-          src={pokemon.sprite}
-          alt={pokemon.species}
-          width="150px"
-          height="150px"
-          placeholder="blur"
-          blurDataURL="/assets/placeholder.png"
-          loading="lazy"
-        ></Image>
-        <Text
-          style={{
-            fontFamily: "'Pokemon Solid', sans-serif",
-            fontSize: '40px',
-          }}
-        >
-          {pokemon.species}
-        </Text>
-        <Grid>
-          <BasicInfo pokemon={pokemon} />
-          <Abilities pokemon={pokemon} />
-          <BaseStats pokemon={pokemon} />
-        </Grid>
-        <Button onClick={() => setIsOpen(true)}>all available sprites</Button>
-        <Modal
-          title={'sprities'}
-          handleClose={() => setIsOpen(false)}
-          isOpen={isOpen}
-        >
-          <SpritesView pokemonSpecies={pokemon.species} />
-        </Modal>
-      </Wrapper>
+      <Image
+        src={pokemon.sprite}
+        alt={pokemon.species}
+        width="150px"
+        height="150px"
+        placeholder="blur"
+        blurDataURL="/assets/placeholder.png"
+        loading="lazy"
+      ></Image>
+      <Text
+        style={{
+          fontFamily: "'Pokemon Solid', sans-serif",
+          fontSize: '40px',
+        }}
+      >
+        {pokemon.species}
+      </Text>
+      <Grid>
+        <BasicInfo pokemon={pokemon} />
+        <Abilities pokemon={pokemon} />
+        <BaseStats pokemon={pokemon} />
+      </Grid>
+      <Button onClick={() => setIsOpen(true)}>all available sprites</Button>
+      <Modal
+        title={'sprities'}
+        handleClose={() => setIsOpen(false)}
+        isOpen={isOpen}
+      >
+        <SpritesView pokemonSpecies={pokemon.species} />
+      </Modal>
     </PageWrapper>
   );
 };

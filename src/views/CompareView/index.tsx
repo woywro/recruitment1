@@ -1,14 +1,15 @@
 import { useLazyQuery } from '@apollo/react-hooks';
-import type { Query } from '@favware/graphql-pokemon';
 import gql from 'graphql-tag';
 import React, { useEffect, useState } from 'react';
+import { ScrollSync } from 'react-scroll-sync';
 import styled from 'styled-components';
-import { PokemonCard } from './components/PokemonCard';
+import {
+  PokemonInterface,
+  ComparedPokemonInterface,
+} from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
-import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-import { PokemonInterface } from '../../types/PokemonInterface';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -43,30 +44,36 @@ const GET_POKEMON_DETAILS = gql`
   }
 `;
 
-export const CompareView = ({ pokemons }) => {
-  const [comparedPokemons, setComparedPokemons] = useState([]);
-  const [comparedPokemonsList, setComparedPokemonsList] = useState([]);
-  const [comparisionListCard, setComparisionListCard] = useState([]);
-  // const [highestStats, setHighestStats] = useState([]);
+interface Props {
+  pokemons: string[];
+}
+
+export const CompareView = ({ pokemons }: Props) => {
+  const [comparedPokemons, setComparedPokemons] = useState<
+    ComparedPokemonInterface[] | []
+  >([]);
+  const [comparedPokemonsList, setComparedPokemonsList] = useState<
+    ComparedPokemonInterface[] | []
+  >([]);
 
   const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
 
   const highlightStats = () => {
-    const res = getHighestStats(comparedPokemons);
-    // setHighestStats(res);
-    const comparedPokemonsDeepCopy = JSON.parse(
+    const highestStats = getHighestStats(comparedPokemons);
+    const comparedPokemonsDeepCopy: ComparedPokemonInterface[] = JSON.parse(
       JSON.stringify(comparedPokemons)
     );
-    comparedPokemonsDeepCopy.map((pokemon) => {
+    comparedPokemonsDeepCopy.map((pokemon: ComparedPokemonInterface) => {
       pokemon.highestValues = [];
       for (let i = 0; i < Object.values(pokemon.baseStats).length; i++) {
-        if (Object.values(pokemon.baseStats)[i] == Object.values(res)[i]) {
+        if (
+          Object.values(pokemon.baseStats)[i] == Object.values(highestStats)[i]
+        ) {
           pokemon.highestValues.push(Object.keys(pokemon.baseStats)[i]);
         }
       }
     });
     setComparedPokemonsList(comparedPokemonsDeepCopy);
-    console.log(comparedPokemonsDeepCopy);
   };
 
   useEffect(() => {
@@ -79,16 +86,18 @@ export const CompareView = ({ pokemons }) => {
         {comparedPokemonsList.length !== 0 && (
           <ScrollSync>
             <>
-              {comparedPokemonsList.map((comparedPokemon: PokemonInterface) => {
-                return (
-                  <PokemonDataCard
-                    key={comparedPokemon.species}
-                    item={comparedPokemon}
-                    comparedPokemons={comparedPokemons}
-                    setComparedPokemons={setComparedPokemons}
-                  />
-                );
-              })}
+              {comparedPokemonsList.map(
+                (comparedPokemon: ComparedPokemonInterface) => {
+                  return (
+                    <PokemonDataCard
+                      key={comparedPokemon.species}
+                      comparedPokemon={comparedPokemon}
+                      comparedPokemons={comparedPokemons}
+                      setComparedPokemons={setComparedPokemons}
+                    />
+                  );
+                }
+              )}
             </>
           </ScrollSync>
         )}

@@ -2,8 +2,13 @@ import { Text } from '../../../../components/Text';
 import Image from 'next/image';
 import styled from 'styled-components';
 import breakpoints from '../../../../theme/breakpoints';
+import { PokemonInterface } from '../../../../types/PokemonInterface';
 
-export const BasicInfo = ({ pokemon }) => {
+interface Props {
+  pokemon: PokemonInterface;
+}
+
+export const BasicInfo = ({ pokemon }: Props) => {
   return (
     <Wrapper>
       <Text size={'big'}>BasicInfo</Text>
@@ -33,5 +38,3 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
-
-const TextWrapper = styled.div``;

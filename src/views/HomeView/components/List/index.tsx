@@ -10,7 +10,7 @@ interface Props {
 export const List = ({ pokemons }: Props) => {
   return (
     <ListWrapper>
-      {pokemons.map((pokemon) => (
+      {pokemons.map((pokemon: string) => (
         <Link
           key={pokemon}
           href={`pokemon/${pokemonSpeciesFormatter(pokemon)}`}

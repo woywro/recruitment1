@@ -3,18 +3,29 @@ import styled from 'styled-components';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
 import { hoverEffectBg } from '../../../../mixins/hoverEffects';
-import { getHighestStats } from '../../../../utils/getHighestStats';
+import {
+  ComparedPokemonInterface,
+  PokemonInterface,
+} from '../../../../types/PokemonInterface';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
+import type { Query } from '@favware/graphql-pokemon';
+
+interface Props {
+  pokemons: string[];
+  comparedPokemons: ComparedPokemonInterface[];
+  setComparedPokemons: (arg0: ComparedPokemonInterface[]) => void;
+  getPokemon: any;
+}
 
 export const PokemonChoiceCard = ({
   pokemons,
   comparedPokemons,
   setComparedPokemons,
   getPokemon,
-}) => {
+}: Props) => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddToComparision = (pokemon) => {
+  const handleAddToComparision = (pokemon: string) => {
     setLoading(true);
     getPokemon({
       variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
@@ -24,7 +35,6 @@ export const PokemonChoiceCard = ({
         { highestValues: [], ...res.data.getPokemon },
       ]);
       setLoading(false);
-      console.log(res.data.getPokemon);
     });
   };
 

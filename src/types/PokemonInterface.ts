@@ -2,6 +2,7 @@ export interface PokemonInterface {
   num: number;
   species: string;
   types: string;
+  color: string;
   abilities: {
     first: string;
     second: string;
@@ -25,4 +26,8 @@ export interface PokemonInterface {
   shinySprite: string;
   backSprite: string;
   shinyBackSprite: string;
+}
+
+export interface ComparedPokemonInterface extends PokemonInterface {
+  highestValues: string[];
 }

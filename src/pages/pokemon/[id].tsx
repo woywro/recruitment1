@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 import { PokemonView } from '../../views/PokemonView';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 import { PokemonInterface } from '../../types/PokemonInterface';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 interface Props {
   pokemon: PokemonInterface;
@@ -33,7 +34,7 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-export async function getStaticProps(context) {
+export const getStaticProps = async (context) => {
   const species = context.params.id.toString();
   try {
     const { data } = await client.query({
@@ -62,4 +63,4 @@ export async function getStaticProps(context) {
   } catch (err) {
     console.log(err);
   }
-}
+};

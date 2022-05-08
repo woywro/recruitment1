@@ -1,8 +1,26 @@
-export const getHighestStats = (comparedPokemons) => {
-  const allStats = comparedPokemons.map((pokemon) => {
-    return pokemon.baseStats;
-  });
-  const result = {
+import {
+  PokemonInterface,
+  ComparedPokemonInterface,
+} from '../types/PokemonInterface';
+
+interface baseStatsInterface {
+  hp: number;
+  attack: number;
+  defense: number;
+  specialattack: number;
+  specialdefense: number;
+  speed: number;
+}
+
+export const getHighestStats = (
+  comparedPokemons: ComparedPokemonInterface[]
+) => {
+  const allStats: baseStatsInterface[] = comparedPokemons.map(
+    (pokemon: ComparedPokemonInterface) => {
+      return pokemon.baseStats;
+    }
+  );
+  const result: baseStatsInterface = {
     hp: Math.max(...allStats.map((o) => o.hp)),
     attack: Math.max(...allStats.map((o) => o.attack)),
     defense: Math.max(...allStats.map((o) => o.defense)),

@@ -1,7 +1,12 @@
 import { Text } from '../../../../components/Text';
 import styled from 'styled-components';
+import { PokemonInterface } from '../../../../types/PokemonInterface';
 
-export const Abilities = ({ pokemon }) => {
+interface Props {
+  pokemon: PokemonInterface;
+}
+
+export const Abilities = ({ pokemon }: Props) => {
   return (
     <Wrapper>
       <Text size={'big'}>Abilities</Text>

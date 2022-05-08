@@ -7,7 +7,5 @@ export const pokemonSpeciesFormatter = (species: string) => {
     .replaceAll("'", '')
     .replaceAll('%', '')
     .replaceAll('type:null', 'pokestarf00');
-
-  // console.log(speciesFormatted);
   return speciesFormatted;
 };
