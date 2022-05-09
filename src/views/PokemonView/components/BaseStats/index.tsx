@@ -1,6 +1,8 @@
 import { Text } from '../../../../components/Text';
 import styled from 'styled-components';
 import { PokemonInterface } from '../../../../types/PokemonInterface';
+import { Section } from '../../../../components/Section';
+import { SectionField } from '../../../../components/SectionField';
 
 interface Props {
   pokemon: PokemonInterface;
@@ -8,26 +10,19 @@ interface Props {
 
 export const BaseStats = ({ pokemon }: Props) => {
   return (
-    <Wrapper>
-      <Text size={'big'}>BaseStats</Text>
-      <Text>hp: {pokemon.baseStats.hp}</Text>
-      <Text>attack: {pokemon.baseStats.attack}</Text>
-      <Text>defense: {pokemon.baseStats.defense}</Text>
-      <Text>specialattack: {pokemon.baseStats.specialattack}</Text>
-      <Text>specialdefense: {pokemon.baseStats.specialdefense}</Text>
-      <Text>speed: {pokemon.baseStats.speed}</Text>
-    </Wrapper>
+    <Section title={'Base stats'}>
+      <SectionField field={'hp'} value={pokemon.baseStats.hp} />
+      <SectionField field={'attack'} value={pokemon.baseStats.attack} />
+      <SectionField field={'defense'} value={pokemon.baseStats.defense} />
+      <SectionField
+        field={'specialattack'}
+        value={pokemon.baseStats.specialattack}
+      />
+      <SectionField
+        field={'specialdefense'}
+        value={pokemon.baseStats.specialdefense}
+      />
+      <SectionField field={'speed'} value={pokemon.baseStats.speed} />
+    </Section>
   );
 };
-
-const Wrapper = styled.div`
-  background: white;
-  border-radius: 20px;
-  display: flex;
-  flex-flow: column;
-  box-shadow: ${(props) => props.theme.shadow};
-  padding: 20px;
-  grid-area: c;
-  height: 100%;
-  width: 100%;
-`;

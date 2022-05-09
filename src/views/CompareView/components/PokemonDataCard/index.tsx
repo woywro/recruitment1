@@ -7,8 +7,8 @@ import {
   ComparedPokemonInterface,
   PokemonInterface,
 } from '../../../../types/PokemonInterface';
-import { ComparisionField } from '../ComparisionField';
-import { Section } from '../Section';
+import { SectionField } from '../../../../components/SectionField';
+import { Section } from '../../../../components/Section';
 import { ComparisionList, Wrapper } from './style';
 
 interface DataInterface {
@@ -89,16 +89,13 @@ export const PokemonDataCard = ({
             >
               {comparedPokemon.species}
             </Text>
-            <ComparisionField
-              field={'species'}
-              value={comparedPokemon.species}
-            />
-            <ComparisionField field={'types'} value={comparedPokemon.types} />
+            <SectionField field={'species'} value={comparedPokemon.species} />
+            <SectionField field={'types'} value={comparedPokemon.types} />
           </Section>
           <Section title={'Abilities'}>
             {Abilities.map((ability) => {
               return (
-                <ComparisionField
+                <SectionField
                   field={ability.key}
                   value={ability.value}
                   key={ability.key}
@@ -109,7 +106,7 @@ export const PokemonDataCard = ({
           <Section title={'Stats'}>
             {Stats.map((stat) => {
               return (
-                <ComparisionField
+                <SectionField
                   key={stat.key}
                   field={stat.key}
                   value={stat.value}
@@ -123,11 +120,8 @@ export const PokemonDataCard = ({
             })}
           </Section>
           <Section title={'gender'}>
-            <ComparisionField
-              field={'male'}
-              value={comparedPokemon.gender.male}
-            />
-            <ComparisionField
+            <SectionField field={'male'} value={comparedPokemon.gender.male} />
+            <SectionField
               field={'female'}
               value={comparedPokemon.gender.female}
             />

@@ -1,9 +1,14 @@
 import { client } from '../../../../apollo-client';
 import { gql } from '@apollo/client';
 import { pokemonSpeciesFormatter } from '../../../utils/pokemonSpeciesFormatter';
-export default async function handler(req, res) {
-  const { pokemons } = req.query;
-  const splitPokemons = pokemons.split('_');
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const pokemons: any = req.query.pokemons;
+  const splitPokemons: string[] = pokemons.split('_');
   const pokemon1 = pokemonSpeciesFormatter(splitPokemons[0]);
   const pokemon2 = pokemonSpeciesFormatter(splitPokemons[1]);
 

@@ -56,7 +56,9 @@ export const CompareView = ({ pokemons }: Props) => {
   >([]);
 
   const PokemonDataCard = dynamic(() =>
-    import('./components/PokemonDataCard').then((mod) => mod.PokemonDataCard)
+    import('./components/PokemonDataCard').then(
+      (mod) => mod.PokemonDataCard as any
+    )
   );
 
   const [getPokemon] = useLazyQuery(GET_POKEMON_DETAILS);

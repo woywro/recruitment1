@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styled from 'styled-components';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
 import { ListWrapper, PokemonListItem } from './style';
 

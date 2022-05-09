@@ -1,42 +1,33 @@
 import styled from 'styled-components';
-import { hoverEffectBg } from '../../mixins/hoverEffects';
+import { hoverEffectBg, hoverEffectText } from '../../mixins/hoverEffects';
 import breakpoints from '../../theme/breakpoints';
 export const SpritesButton = styled.button`
-  border:none;
-  cursor:pointer;
-  width:100%;
-  height:100%;
-  background:none;
+  border: none;
+  cursor: pointer;
   font-size: 30px;
-  background: ${(props) => props.theme.colors.primary}
-  grid-area: 'e';
-  :hover{
-    ${hoverEffectBg}
+  padding: 20px;
+  border-radius: 20px;
+  background: none;
+  :hover {
+    ${hoverEffectText}
   }
 `;
 
-export const Grid = styled.div`
-  overflow-y: scroll;
-  width: 100%;
+export const SectionWrapper = styled.div`
   padding: 20px;
   height: 100%;
-  display: grid;
+  width: 70%;
+  align-items: start;
   justify-items: center;
-  align-items: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'a a'
-    'b c'
-    'd e';
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   @media only screen and ${breakpoints.device.sm} {
-    grid-template-areas:
-      'i i'
-      'a a'
-      'b b'
-      'c c'
-      'd d';
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
   }
   @media only screen and ${breakpoints.device.lg} {
+    width: 100%;
   }
 `;

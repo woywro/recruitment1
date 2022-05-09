@@ -1,4 +1,4 @@
-import { Text } from '../../../../components/Text';
+import { Text } from '../Text';
 import { CompareText } from './style';
 
 interface Props {
@@ -7,11 +7,11 @@ interface Props {
   isHighlighted?: boolean;
 }
 
-export const ComparisionField = ({ field, value, isHighlighted }: Props) => {
+export const SectionField = ({ field, value, isHighlighted }: Props) => {
   return (
     <CompareText isHighlighted={isHighlighted}>
       <Text bold={true}>{field}:</Text>
-      <Text style={{ marginLeft: '2px' }}>{value}</Text>
+      <Text style={{ marginLeft: '3px' }}>{value}</Text>
     </CompareText>
   );
 };

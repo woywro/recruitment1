@@ -3,7 +3,7 @@ import breakpoints from '../theme/breakpoints';
 
 export const PageWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: start;
   width: 100%;
   height: 100%;
@@ -16,11 +16,12 @@ export const PageWrapper = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   padding: 10px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  flex-flow: column;
   background: ${(props) => props.theme.colors.secondaryBg};
   border-radius: 20px;
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
 `;

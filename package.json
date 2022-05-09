@@ -11,7 +11,6 @@
     "@favware/graphql-pokemon": "^6.5.10",
     "apollo-server-micro": "^3.7.0",
     "graphql": "^16.4.0",
-    "i": "^0.3.7",
     "next": "latest",
     "npm": "^8.9.0",
     "react": "17.0.2",

@@ -9,7 +9,7 @@ import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
-import { Grid, SpritesButton } from './style';
+import { SectionWrapper, SpritesButton } from './style';
 import { Modal } from '../../components/Modal';
 
 interface Props {
@@ -17,19 +17,19 @@ interface Props {
 }
 
 export const PokemonView = ({ pokemon }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Wrapper>
-      <Grid>
-        <Showcase pokemon={pokemon} />
+      <Showcase pokemon={pokemon} />
+      <SectionWrapper>
         <BasicInfo pokemon={pokemon} />
         <Abilities pokemon={pokemon} />
         <BaseStats pokemon={pokemon} />
-        <SpritesButton onClick={() => setIsOpen(true)}>
-          all available sprites <FcImageFile />
-        </SpritesButton>
-      </Grid>
+      </SectionWrapper>
+      <SpritesButton onClick={() => setIsOpen(true)}>
+        all available sprites <FcImageFile />
+      </SpritesButton>
       {isOpen && (
         <Modal title={'sprities'} handleClose={() => setIsOpen(false)}>
           <SpritesView
