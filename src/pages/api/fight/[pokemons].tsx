@@ -8,7 +8,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const pokemons: any = req.query.pokemons;
+  if (pokemons.indexOf('_') == -1) {
+    throw new Error('You have to provide second species');
+  }
   const splitPokemons: string[] = pokemons.split('_');
+
   const pokemon1 = pokemonSpeciesFormatter(splitPokemons[0]);
   const pokemon2 = pokemonSpeciesFormatter(splitPokemons[1]);
 
@@ -16,7 +20,9 @@ export default async function handler(
     query ($pokemon: String!) {
       getFuzzyPokemon(pokemon: $pokemon) {
         species
-        baseStatsTotal
+        baseStats {
+          attack
+        }
       }
     }
   `;
@@ -35,8 +41,10 @@ export default async function handler(
     },
   });
 
-  const pokemon1Stats = fetchedPokemon1.data.getFuzzyPokemon[0].baseStatsTotal;
-  const pokemon2Stats = fetchedPokemon2.data.getFuzzyPokemon[0].baseStatsTotal;
+  const pokemon1Stats =
+    fetchedPokemon1.data.getFuzzyPokemon[0].baseStats.attack;
+  const pokemon2Stats =
+    fetchedPokemon2.data.getFuzzyPokemon[0].baseStats.attack;
 
   const chooseWinner = () => {
     if (pokemon1Stats > pokemon2Stats) {
@@ -44,7 +52,7 @@ export default async function handler(
     } else if (pokemon1Stats < pokemon2Stats) {
       return pokemon2;
     } else {
-      return splitPokemons[Math.round(Math.random() * splitPokemons.length)];
+      return splitPokemons[Math.round(Math.random() * 2)];
     }
   };
   const winner = chooseWinner();

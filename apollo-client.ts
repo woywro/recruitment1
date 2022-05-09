@@ -5,7 +5,7 @@ const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
   cache: cache,
-  uri: 'https://graphqlpokemon.favware.tech/',
+  uri: process.env.NEXT_PUBLIC_GRAPHPOKEMON,
 
   name: 'graphql-pokemon-client',
   version: '1.0',
