@@ -33,8 +33,10 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
+  border-radius: 20px;
+
   :hover {
     ${hoverEffectBg}
   }

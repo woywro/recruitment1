@@ -11,7 +11,7 @@ align-items: center;
 flex-flow: column;
 background-image:   ${(props) => props.theme.colors.gradient};
 position: fixed;
-transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
+transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
 top: 0;
 right: 0;
 height: 100%;
@@ -31,9 +31,9 @@ export const MobileNavItems = styled.ul`
 
 export const MobileNavItem = styled.li<{ isActive: boolean }>`
   text-decoration: none;
-  font-size: 24px;
+  font-size: 28px;
   color: white;
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
   cursor: pointer;
   position: relative;

@@ -6,8 +6,9 @@ export const MobileNavbarWrapper = styled.nav`
   width: 100%;
   height: 90px;
   flex-flow: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
   background: ${(props) => props.theme.colors.gradient};
   @media only screen and ${breakpoints.device.sm} {
     display: flex;
@@ -21,7 +22,5 @@ export const MenuButton = styled.button`
   background: none;
   border: none;
   padding: 5px;
-  position: absolute;
-  left: 15px;
   cursor: pointer;
 `;

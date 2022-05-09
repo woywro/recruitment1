@@ -19,7 +19,7 @@ export const Item = styled.div<{ isActive?: boolean }>`
     isActive &&
     css`
       background: rgba(0, 0, 0, 0.1);
-      border-radius: 20px;
+      border-radius: 10px;
     `};
   &:hover:after {
     content: '';
@@ -31,11 +31,11 @@ export const Item = styled.div<{ isActive?: boolean }>`
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 10px;
-  height: 70px;
+  height: 80px;
   @media only screen and ${breakpoints.device.sm} {
     display: none;
   }
@@ -44,6 +44,15 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const Links = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  margin-right: 50px;
+`;
+
 export const NavItemText = styled.p`
   margin-left: 4px;
+  font-size: 20px;
 `;
