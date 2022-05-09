@@ -1,15 +1,16 @@
 import { SectionField } from '../SectionField';
 import { Section } from '../Section';
 import { PokemonInterface } from '../../types/PokemonInterface';
-import { useMemo } from 'react';
 import { convertToArray } from '../../utils/convertToArray';
+import { useMemo } from 'react';
+
 interface Props {
   baseStats: PokemonInterface['baseStats'];
-  highlightHighest?: boolean;
+  highestValues?: string[];
 }
 
-export const PokemonBaseStats = ({ baseStats, highlightHighest }: Props) => {
-  const BaseStats = convertToArray(baseStats);
+export const PokemonBaseStats = ({ baseStats, highestValues }: Props) => {
+  const BaseStats = useMemo(() => convertToArray(baseStats), [baseStats]);
   return (
     <Section title={'Base stats'}>
       {BaseStats.map((e) => {
@@ -18,7 +19,7 @@ export const PokemonBaseStats = ({ baseStats, highlightHighest }: Props) => {
             key={e.key}
             field={e.key}
             value={e.value}
-            isHighlighted={highlightHighest}
+            isHighlighted={highestValues?.includes(e.key) ? true : false}
           />
         );
       })}

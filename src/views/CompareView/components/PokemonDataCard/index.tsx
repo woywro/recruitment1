@@ -67,7 +67,7 @@ export const PokemonDataCard = ({
           <PokemonAbilities abilities={comparedPokemon.abilities} />
           <PokemonBaseStats
             baseStats={comparedPokemon.baseStats}
-            highlightHighest={true}
+            highestValues={comparedPokemon.highestValues}
           />
           <Section title={'gender'}>
             <SectionField field={'male'} value={comparedPokemon.gender.male} />

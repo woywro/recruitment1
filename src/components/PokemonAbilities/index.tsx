@@ -2,7 +2,6 @@ import { SectionField } from '../SectionField';
 import { Section } from '../Section';
 import { PokemonInterface } from '../../types/PokemonInterface';
 import { convertToArray } from '../../utils/convertToArray';
-import { useMemo } from 'react';
 
 interface Props {
   abilities: PokemonInterface['abilities'];
