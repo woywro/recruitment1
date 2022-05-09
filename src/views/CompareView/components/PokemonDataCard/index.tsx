@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import Image from 'next/image';
+import { useCallback, useMemo } from 'react';
+import { ScrollSyncPane } from 'react-scroll-sync';
 import { Button } from '../../../../components/Button';
 import { Text } from '../../../../components/Text';
-import Image from 'next/image';
 import {
   ComparedPokemonInterface,
   PokemonInterface,
 } from '../../../../types/PokemonInterface';
-import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { ComparisionField } from '../ComparisionField';
 import { Section } from '../Section';
+import { ComparisionList, Wrapper } from './style';
 
 interface DataInterface {
   key: string;
@@ -53,8 +53,14 @@ export const PokemonDataCard = ({
     return returnData;
   };
 
-  const Abilities: DataInterface[] = FormData(comparedPokemon.abilities);
-  const Stats: DataInterface[] = FormData(comparedPokemon.baseStats);
+  const Abilities: DataInterface[] = useMemo(
+    () => FormData(comparedPokemon.abilities),
+    [comparedPokemon]
+  );
+  const Stats: DataInterface[] = useMemo(
+    () => FormData(comparedPokemon.baseStats),
+    [comparedPokemon]
+  );
 
   return (
     <ScrollSyncPane>
@@ -92,7 +98,11 @@ export const PokemonDataCard = ({
           <Section title={'Abilities'}>
             {Abilities.map((ability) => {
               return (
-                <ComparisionField field={ability.key} value={ability.value} />
+                <ComparisionField
+                  field={ability.key}
+                  value={ability.value}
+                  key={ability.key}
+                />
               );
             })}
           </Section>
@@ -100,6 +110,7 @@ export const PokemonDataCard = ({
             {Stats.map((stat) => {
               return (
                 <ComparisionField
+                  key={stat.key}
                   field={stat.key}
                   value={stat.value}
                   isHighlighted={
@@ -126,29 +137,3 @@ export const PokemonDataCard = ({
     </ScrollSyncPane>
   );
 };
-
-const Wrapper = styled.div`
-  min-width: 200px;
-  position: relative;
-  height: 100%;
-  box-shadow: ${(props) => props.theme.shadow};
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow: auto;
-  padding: 10px;
-  background: white;
-  margin: 10px;
-  border-radius: 20px;
-  flex: 0 0 auto;
-`;
-
-const ComparisionList = styled.div`
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  jusitify-content: center;
-  align-items: center;
-  padding: 10px;
-`;

@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
-import { Item, Links, NavItemText } from './style';
+import { Item, Wrapper, NavItemText } from './style';
 
 export const NavBar = () => {
   const router = useRouter();
 
   return (
-    <Links>
+    <Wrapper>
       <Link href={`/`} passHref>
         <Item isActive={router.pathname === '/' ? true : false}>
           <NavItemText>Home</NavItemText>
@@ -18,6 +18,6 @@ export const NavBar = () => {
           <NavItemText>Compare</NavItemText>
         </Item>
       </Link>
-    </Links>
+    </Wrapper>
   );
 };

@@ -1,20 +1,16 @@
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import styled from 'styled-components';
-import { Button } from '../../components/Button';
-import { Modal } from '../../components/Modal';
-import { Text } from '../../components/Text';
-import { hoverEffectBg } from '../../mixins/hoverEffects';
-import breakpoints from '../../theme/breakpoints';
+import { FcImageFile } from 'react-icons/fc';
 import { PokemonInterface } from '../../types/PokemonInterface';
+import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 import { SpritesView } from '../SpritesView';
-import { PageWrapper, Wrapper } from '../style';
+import { Wrapper } from '../style';
 import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
-import { FcImageFile } from 'react-icons/fc';
-import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
+import { Grid, SpritesButton } from './style';
+import { Modal } from '../../components/Modal';
 
 interface Props {
   pokemon: PokemonInterface;
@@ -22,6 +18,7 @@ interface Props {
 
 export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  // const Modal = dynamic(() => import('../../components/Modal'));
 
   return (
     <Wrapper>
@@ -34,55 +31,13 @@ export const PokemonView = ({ pokemon }: Props) => {
           all available sprites <FcImageFile />
         </SpritesButton>
       </Grid>
-      <Modal
-        title={'sprities'}
-        handleClose={() => setIsOpen(false)}
-        isOpen={isOpen}
-      >
-        <SpritesView
-          pokemonSpecies={pokemonSpeciesFormatter(pokemon.species)}
-        />
-      </Modal>
+      {isOpen && (
+        <Modal title={'sprities'} handleClose={() => setIsOpen(false)}>
+          <SpritesView
+            pokemonSpecies={pokemonSpeciesFormatter(pokemon.species)}
+          />
+        </Modal>
+      )}
     </Wrapper>
   );
 };
-
-const SpritesButton = styled.button`
-  border:none;
-  cursor:pointer;
-  width:100%;
-  height:100%;
-  background:none;
-  font-size: 30px;
-  background: ${(props) => props.theme.colors.primary}
-  grid-area: 'e';
-  :hover{
-    ${hoverEffectBg}
-  }
-`;
-
-const Grid = styled.div`
-  overflow-y: scroll;
-  width: 100%;
-  padding: 20px;
-  height: 100%;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'a a'
-    'b c'
-    'd e';
-  gap: 20px;
-  @media only screen and ${breakpoints.device.sm} {
-    grid-template-areas:
-      'i i'
-      'a a'
-      'b b'
-      'c c'
-      'd d';
-  }
-  @media only screen and ${breakpoints.device.lg} {
-  }
-`;

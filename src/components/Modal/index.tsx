@@ -5,12 +5,11 @@ import { CloseButton, ModalTitle, ModalWrapper, Overlay } from './style';
 
 interface Props {
   title: string;
-  isOpen: boolean;
   handleClose: () => void;
   children: JSX.Element[] | JSX.Element;
 }
 
-export const Modal = ({ title, isOpen, handleClose, children }: Props) => {
+export const Modal = ({ title, handleClose, children }: Props) => {
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
@@ -22,7 +21,6 @@ export const Modal = ({ title, isOpen, handleClose, children }: Props) => {
     };
   }, [handleClose]);
 
-  if (!isOpen) return null;
   return (
     <Portal selector="#portal">
       <Overlay>

@@ -17,11 +17,6 @@ export const MobileNavbarWrapper = styled.nav`
   }
 `;
 
-export const Title = styled.h1`
-  font-size: 30px;
-  color: white;
-`;
-
 export const MenuButton = styled.button`
   background: none;
   border: none;

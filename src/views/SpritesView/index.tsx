@@ -8,6 +8,7 @@ import { ErrorMessage } from '../../components/ErrorMessage';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { SpriteElement } from './components/SpriteElement';
 import { Wrapper } from '../style';
+import { SpritesWrapper } from './style';
 
 interface Props {
   pokemonSpecies: string;
@@ -49,16 +50,3 @@ export const SpritesView = ({ pokemonSpecies }: Props) => {
     </Wrapper>
   );
 };
-
-const SpritesWrapper = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-`;
-
-// const Wrapper = styled.div`
-//   display: flex;
-//   flex-flow: column;
-//   justify-content: center;
-//   align-items: center;
-// `;

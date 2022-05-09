@@ -29,7 +29,7 @@ export const Item = styled.div<{ isActive?: boolean }>`
   }
 `;
 
-export const Links = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;

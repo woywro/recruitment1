@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { Text } from '../../../../components/Text';
+import { Title, Wrapper } from './style';
 
 interface Props {
   children: JSX.Element[];
@@ -14,16 +13,3 @@ export const Section = ({ children, title }: Props) => {
     </Wrapper>
   );
 };
-
-const Title = styled(Text)`
-  border-bottom: 2px solid ${(props) => props.theme.colors.primary};
-  margin: 5px;
-`;
-
-const Wrapper = styled.div`
-  background: white;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-`;

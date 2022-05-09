@@ -10,6 +10,11 @@ export const Wrapper = styled.div`
   background: ${(props) => props.theme.colors.gradient};
 `;
 
+export const ChildrenWrapper = styled.div`
+  width: 100%;
+  height: calc(100% - (70px));
+`;
+
 export const ViewBox = styled.div`
   width: 80vw;
   height: 80vh;

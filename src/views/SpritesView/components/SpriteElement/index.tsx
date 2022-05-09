@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import Image from 'next/image';
+import { Wrapper } from './style';
 
 interface Props {
   sprite: string;
@@ -20,10 +20,3 @@ export const SpriteElement = ({ sprite }: Props) => {
     </Wrapper>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-`;

@@ -3,14 +3,12 @@ import gql from 'graphql-tag';
 import React, { useEffect, useState } from 'react';
 import { ScrollSync } from 'react-scroll-sync';
 import styled from 'styled-components';
-import {
-  PokemonInterface,
-  ComparedPokemonInterface,
-} from '../../types/PokemonInterface';
+import { ComparedPokemonInterface } from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { PokemonDataCard } from './components/PokemonDataCard';
+import { CompareWrapper, List } from './style';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -57,7 +55,7 @@ export const CompareView = ({ pokemons }: Props) => {
     ComparedPokemonInterface[] | []
   >([]);
 
-  const [getPokemon, { loading, data }] = useLazyQuery(GET_POKEMON_DETAILS);
+  const [getPokemon] = useLazyQuery(GET_POKEMON_DETAILS);
 
   const highlightStats = () => {
     const highestStats = getHighestStats(comparedPokemons);
@@ -86,7 +84,7 @@ export const CompareView = ({ pokemons }: Props) => {
       <CompareWrapper>
         {comparedPokemonsList.length !== 0 && (
           <ScrollSync>
-            <>
+            <List>
               {comparedPokemonsList.map(
                 (comparedPokemon: ComparedPokemonInterface) => {
                   return (
@@ -99,7 +97,7 @@ export const CompareView = ({ pokemons }: Props) => {
                   );
                 }
               )}
-            </>
+            </List>
           </ScrollSync>
         )}
         <PokemonChoiceCard
@@ -112,32 +110,3 @@ export const CompareView = ({ pokemons }: Props) => {
     </Wrapper>
   );
 };
-
-const CompareWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  display: flex;
-  padding: 20px;
-`;
-
-const AddSlotButton = styled.div`
-  width: 200px;
-  height: 100%;
-  box-shadow: ${(props) => props.theme.shadow};
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  overflow-y: scroll;
-  padding: 5px;
-  background: white;
-  margin: 10px;
-  border-radius: 20px;
-  flex: 0 0 auto;
-  cursor: pointer;
-  border: none;
-  font-size: 24px;
-  font-weight: bold;
-`;

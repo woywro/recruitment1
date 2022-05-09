@@ -2,7 +2,7 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 import { ErrorWrapper } from './style';
 interface Props {
-  msg: String;
+  msg: string;
 }
 
 export const ErrorMessage = ({ msg }: Props) => {
