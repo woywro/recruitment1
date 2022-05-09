@@ -2,13 +2,21 @@ import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
 import { CompareView } from '../views/CompareView';
 import { pokemonSpeciesFormatter } from '../utils/pokemonSpeciesFormatter';
+import Head from 'next/head';
 
 interface Props {
   pokemons: string[];
 }
 
 export default function Compare({ pokemons }: Props) {
-  return <CompareView pokemons={pokemons} />;
+  return (
+    <>
+      <Head>
+        <title>Pokemons- Compare</title>
+      </Head>
+      <CompareView pokemons={pokemons} />{' '}
+    </>
+  );
 }
 
 export async function getStaticProps() {
