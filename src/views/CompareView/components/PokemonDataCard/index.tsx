@@ -2,11 +2,14 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../../components/Button';
 import { Text } from '../../../../components/Text';
+import Image from 'next/image';
 import {
   ComparedPokemonInterface,
   PokemonInterface,
 } from '../../../../types/PokemonInterface';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+import { ComparisionField } from '../ComparisionField';
+import { Section } from '../Section';
 
 interface DataInterface {
   key: string;
@@ -52,7 +55,6 @@ export const PokemonDataCard = ({
 
   const Abilities: DataInterface[] = FormData(comparedPokemon.abilities);
   const Stats: DataInterface[] = FormData(comparedPokemon.baseStats);
-  const Gender: DataInterface[] = FormData(comparedPokemon.gender);
 
   return (
     <ScrollSyncPane>
@@ -64,6 +66,15 @@ export const PokemonDataCard = ({
         </Button>
         <ComparisionList>
           <Section>
+            <Image
+              src={comparedPokemon.sprite}
+              alt={comparedPokemon.species}
+              width="150px"
+              height="150px"
+              placeholder="blur"
+              blurDataURL="/assets/placeholder.png"
+              loading="lazy"
+            ></Image>
             <Text
               style={{
                 fontFamily: "'Pokemon Solid', sans-serif",
@@ -72,68 +83,49 @@ export const PokemonDataCard = ({
             >
               {comparedPokemon.species}
             </Text>
-            <CompareText>
-              <Text bold={true}>{'species'}: </Text>
-              <Text>{comparedPokemon.species}</Text>
-            </CompareText>
-            <CompareText>
-              <Text bold={true}>{'types'}: </Text>
-              <Text>{comparedPokemon.types}</Text>
-            </CompareText>
+            <ComparisionField
+              field={'species'}
+              value={comparedPokemon.species}
+            />
+            <ComparisionField field={'types'} value={comparedPokemon.types} />
           </Section>
-          <Section>
-            <Title size={'big'}>Abilities</Title>
+          <Section title={'Abilities'}>
             {Abilities.map((ability) => {
               return (
-                <CompareText>
-                  <Text bold={true}>{ability.key}: </Text>
-                  <Text>{ability.value}</Text>
-                </CompareText>
+                <ComparisionField field={ability.key} value={ability.value} />
               );
             })}
           </Section>
-          <Section>
-            <Title size={'big'}>Stats</Title>
+          <Section title={'Stats'}>
             {Stats.map((stat) => {
               return (
-                <CompareText
+                <ComparisionField
+                  field={stat.key}
+                  value={stat.value}
                   isHighlighted={
                     comparedPokemon.highestValues.includes(stat.key)
                       ? true
                       : false
                   }
-                >
-                  <Text bold={true}>{stat.key}: </Text>
-                  <Text>{stat.value}</Text>
-                </CompareText>
+                />
               );
             })}
           </Section>
-          <Section>
-            <Title size={'big'}>Gender</Title>
-            {Gender.map((gender) => {
-              return (
-                <CompareText>
-                  <Text bold={true}>{gender.key}: </Text>
-                  <Text>{gender.value}</Text>
-                </CompareText>
-              );
-            })}
+          <Section title={'gender'}>
+            <ComparisionField
+              field={'male'}
+              value={comparedPokemon.gender.male}
+            />
+            <ComparisionField
+              field={'female'}
+              value={comparedPokemon.gender.female}
+            />
           </Section>
         </ComparisionList>
       </Wrapper>
     </ScrollSyncPane>
   );
 };
-
-const Title = styled(Text)`
-  border-bottom: 2px solid ${(props) => props.theme.colors.primary};
-  margin: 5px;
-`;
-
-const Section = styled.div`
-  background: white;
-`;
 
 const Wrapper = styled.div`
   min-width: 200px;
@@ -145,7 +137,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow: auto;
-  padding: 5px;
+  padding: 10px;
   background: white;
   margin: 10px;
   border-radius: 20px;
@@ -154,19 +146,9 @@ const Wrapper = styled.div`
 
 const ComparisionList = styled.div`
   width: 100%;
-
   display: flex;
   flex-flow: column;
-  jusitify-content: flex-start;
-  align-items: start;
+  jusitify-content: center;
+  align-items: center;
   padding: 10px;
-`;
-
-const CompareText = styled.div<{ isHighlighted?: boolean }>`
-  padding: 2px;
-  display: flex;
-  flex-flow: row;
-  background: ${(props) => (props.isHighlighted ? '#abff32' : 'none')};
-  border-radius: 10px;
-  margin: 2px;
 `;

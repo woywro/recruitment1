@@ -65,7 +65,7 @@ export const PokemonChoiceCard = ({
 };
 
 const Wrapper = styled.div`
-  width: auto;
+  min-width: 250px;
   position: relative;
   height: 100%;
   box-shadow: ${(props) => props.theme.shadow};

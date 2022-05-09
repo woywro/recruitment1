@@ -25,7 +25,7 @@ export const BasicInfo = ({ pokemon }: Props) => {
 const Wrapper = styled.div`
   background: white;
   border-radius: 20px;
-  grid-area: a;
+  grid-area: b;
   display: flex;
   flex-flow: column;
   width: 100%;

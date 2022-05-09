@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   flex-flow: column;
   box-shadow: ${(props) => props.theme.shadow};
   padding: 20px;
-  grid-area: b;
+  grid-area: c;
   height: 100%;
   width: 100%;
 `;

@@ -12,6 +12,9 @@ import { PageWrapper, Wrapper } from '../style';
 import { Abilities } from './components/Abilities';
 import { BaseStats } from './components/BaseStats';
 import { BasicInfo } from './components/BasicInfo';
+import { Showcase } from './components/Showcase';
+import { FcImageFile } from 'react-icons/fc';
+import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 
 interface Props {
   pokemon: PokemonInterface;
@@ -19,35 +22,16 @@ interface Props {
 
 export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Wrapper>
       <Grid>
-        <div style={{ gridArea: 'i' }}>
-          <div>
-            <Image
-              src={pokemon.sprite}
-              alt={pokemon.species}
-              width="150px"
-              height="150px"
-              placeholder="blur"
-              blurDataURL="/assets/placeholder.png"
-              loading="lazy"
-            ></Image>
-          </div>
-          <Text
-            style={{
-              fontFamily: "'Pokemon Solid', sans-serif",
-              fontSize: '40px',
-            }}
-          >
-            {pokemon.species}
-          </Text>
-        </div>
+        <Showcase pokemon={pokemon} />
         <BasicInfo pokemon={pokemon} />
         <Abilities pokemon={pokemon} />
         <BaseStats pokemon={pokemon} />
         <SpritesButton onClick={() => setIsOpen(true)}>
-          all available sprites
+          all available sprites <FcImageFile />
         </SpritesButton>
       </Grid>
       <Modal
@@ -55,23 +39,23 @@ export const PokemonView = ({ pokemon }: Props) => {
         handleClose={() => setIsOpen(false)}
         isOpen={isOpen}
       >
-        <SpritesView pokemonSpecies={pokemon.species} />
+        <SpritesView
+          pokemonSpecies={pokemonSpeciesFormatter(pokemon.species)}
+        />
       </Modal>
     </Wrapper>
   );
 };
 
 const SpritesButton = styled.button`
-  background: white;
-  border-radius: 20px;
   border:none;
   cursor:pointer;
-  box-shadow: ${(props) => props.theme.shadow};
   width:100%;
   height:100%;
+  background:none;
   font-size: 30px;
   background: ${(props) => props.theme.colors.primary}
-  grid-area: 'd';
+  grid-area: 'e';
   :hover{
     ${hoverEffectBg}
   }
@@ -87,9 +71,9 @@ const Grid = styled.div`
   align-items: center;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    'i i'
-    'a b'
-    'c d';
+    'a a'
+    'b c'
+    'd e';
   gap: 20px;
   @media only screen and ${breakpoints.device.sm} {
     grid-template-areas:
