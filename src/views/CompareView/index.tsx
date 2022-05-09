@@ -55,7 +55,7 @@ export const CompareView = ({ pokemons }: Props) => {
     ComparedPokemonInterface[]
   >([]);
 
-  const [getPokemon] = useLazyQuery(GET_POKEMON_DETAILS);
+  const getPokemonDetails = useLazyQuery(GET_POKEMON_DETAILS);
 
   const highlightStats = useCallback(() => {
     const highestStats = getHighestStats(comparedPokemons);
@@ -104,7 +104,7 @@ export const CompareView = ({ pokemons }: Props) => {
           pokemons={pokemons}
           comparedPokemons={comparedPokemons}
           setComparedPokemons={setComparedPokemons}
-          getPokemon={getPokemon}
+          getPokemonDetails={getPokemonDetails}
         />
       </CompareWrapper>
     </Wrapper>
