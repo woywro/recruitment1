@@ -13,10 +13,10 @@ export const Text = styled.p<{
 const handleFontSize = (size?: 'small' | 'big') => {
   switch (size) {
     case 'small':
-      return '16px';
+      return '18px';
     case 'big':
       return '26px';
     default:
-      return '18px';
+      return '20px';
   }
 };

@@ -45,7 +45,9 @@ export const PokemonChoiceCard = ({
 
   return (
     <Wrapper>
-      <Text bold={true}>Choose from list</Text>
+      <Text bold={true} style={{ padding: '10px' }}>
+        Choose from list
+      </Text>
       <List>
         {loading ? (
           <LoadingSpinner />

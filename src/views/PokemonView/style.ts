@@ -7,7 +7,7 @@ export const SpritesButton = styled.button`
   font-size: 30px;
   padding: 20px;
   border-radius: 20px;
-  background: none;
+  background: ${(props) => props.theme.colors.primary};
   :hover {
     ${hoverEffectText}
   }
@@ -15,7 +15,6 @@ export const SpritesButton = styled.button`
 
 export const SectionWrapper = styled.div`
   padding: 20px;
-  height: 100%;
   width: 70%;
   align-items: start;
   justify-items: center;

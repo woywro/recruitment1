@@ -25,7 +25,7 @@ export const ModalWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-flow: column;
-  min-width: 400px;
+  min-width: 300px;
   min-height: 300px;
   overflow-y: hidden;
 `;

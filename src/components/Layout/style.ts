@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const ChildrenWrapper = styled.div`
   width: 100%;
-  height: calc(100% - (70px));
+  height: calc(100% - (80px));
 `;
 
 export const ViewBox = styled.div`

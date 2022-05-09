@@ -21,10 +21,9 @@ export const ListWrapper = styled.ol`
 
 export const PokemonListItem = styled.li`
   border-radius: 20px;
-  font-size: 30px;
+  font-size: 20px;
   margin: 2px;
   cursor: pointer;
-  font-size: 15px;
   :hover {
     ${hoverEffectText}
   }
