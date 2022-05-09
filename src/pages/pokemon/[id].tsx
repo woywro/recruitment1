@@ -4,13 +4,21 @@ import { PokemonView } from '../../views/PokemonView';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 import { PokemonInterface } from '../../types/PokemonInterface';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
 
 interface Props {
   pokemon: PokemonInterface;
 }
 
 export default function Pokemon({ pokemon }: Props) {
-  return pokemon !== undefined && <PokemonView pokemon={pokemon} />;
+  return (
+    <>
+      <Head>
+        <title>Pokemons- {pokemonSpeciesFormatter(pokemon.species)}</title>
+      </Head>
+      {pokemon !== undefined && <PokemonView pokemon={pokemon} />}
+    </>
+  );
 }
 
 export async function getStaticPaths() {

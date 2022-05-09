@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Text } from '../Text';
+import breakpoints from '../../theme/breakpoints';
 
 export const Overlay = styled.div`
   position: fixed;
@@ -28,6 +29,10 @@ export const ModalWrapper = styled.div`
   min-width: 300px;
   min-height: 300px;
   overflow-y: hidden;
+  @media only screen and ${breakpoints.device.lg} {
+    height: auto;
+    overflow-y: scroll;
+  }
 `;
 
 export const CloseButton = styled.button`

@@ -8,7 +8,6 @@ import { Logo } from '../Logo';
 export const MobileNavBar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
-  console.log(router);
   return (
     <MobileNavbarWrapper>
       {router.pathname == '/pokemon/[id]' && (

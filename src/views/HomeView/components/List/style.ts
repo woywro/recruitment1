@@ -13,9 +13,10 @@ export const ListWrapper = styled.ol`
   justify-items: center;
   padding: 20px;
   @media only screen and ${breakpoints.device.sm} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   @media only screen and ${breakpoints.device.lg} {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

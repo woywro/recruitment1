@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { ErrorMessage } from '../../../../components/ErrorMessage';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
 import { ComparedPokemonInterface } from '../../../../types/PokemonInterface';
@@ -9,16 +10,16 @@ interface Props {
   pokemons: string[];
   comparedPokemons: ComparedPokemonInterface[];
   setComparedPokemons: (arg0: ComparedPokemonInterface[]) => void;
-  getPokemon: any;
+  getPokemonDetails: any;
 }
 
 export const PokemonChoiceCard = ({
   pokemons,
   comparedPokemons,
   setComparedPokemons,
-  getPokemon,
+  getPokemonDetails,
 }: Props) => {
-  const [loading, setLoading] = useState(false);
+  const [getPokemon, { error, loading }] = getPokemonDetails;
 
   const handleAddToComparision = useCallback(
     (pokemon: string) => {
@@ -28,7 +29,6 @@ export const PokemonChoiceCard = ({
       if (comparedPokemonsSpecies.includes(pokemon)) {
         alert('This pokemon is already on the list!');
       } else {
-        setLoading(true);
         getPokemon({
           variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
         }).then((res) => {
@@ -36,7 +36,6 @@ export const PokemonChoiceCard = ({
             ...comparedPokemons,
             { highestValues: [], ...res.data.getPokemon },
           ]);
-          setLoading(false);
         });
       }
     },
@@ -51,6 +50,8 @@ export const PokemonChoiceCard = ({
       <List>
         {loading ? (
           <LoadingSpinner />
+        ) : error ? (
+          <ErrorMessage msg={'An error occured!'} />
         ) : (
           pokemons.map((pokemon: string) => {
             return (
