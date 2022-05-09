@@ -1,7 +1,4 @@
-import {
-  PokemonInterface,
-  ComparedPokemonInterface,
-} from '../types/PokemonInterface';
+import { ComparedPokemonInterface } from '../types/PokemonInterface';
 
 interface baseStatsInterface {
   hp: number;

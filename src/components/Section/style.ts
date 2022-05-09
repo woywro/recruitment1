@@ -12,4 +12,5 @@ export const Wrapper = styled.div`
   flex-flow: column;
   justify-content: center;
   align-items: start;
+  width: 100%;
 `;

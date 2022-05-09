@@ -4,7 +4,7 @@ import { MenuButton, MobileNavbarWrapper } from './style';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 export const MobileNavBar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <MobileNavbarWrapper>
       <MenuButton onClick={() => setOpen(!open)}>

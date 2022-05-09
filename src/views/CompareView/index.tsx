@@ -1,14 +1,13 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollSync } from 'react-scroll-sync';
-import styled from 'styled-components';
 import { ComparedPokemonInterface } from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { CompareWrapper, List } from './style';
-import dynamic from 'next/dynamic';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -49,10 +48,10 @@ interface Props {
 
 export const CompareView = ({ pokemons }: Props) => {
   const [comparedPokemons, setComparedPokemons] = useState<
-    ComparedPokemonInterface[] | []
+    ComparedPokemonInterface[]
   >([]);
   const [comparedPokemonsList, setComparedPokemonsList] = useState<
-    ComparedPokemonInterface[] | []
+    ComparedPokemonInterface[]
   >([]);
 
   const PokemonDataCard = dynamic(() =>

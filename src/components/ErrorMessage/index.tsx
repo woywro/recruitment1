@@ -1,4 +1,3 @@
-import { Button } from '../Button';
 import { Text } from '../Text';
 import { ErrorWrapper } from './style';
 interface Props {

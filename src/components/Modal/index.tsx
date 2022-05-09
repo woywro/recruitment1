@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import useClickOutside from '../../hooks/useClickOutside';
 import { Portal } from '../../wrappers/Portal';
 import { CloseButton, ModalTitle, ModalWrapper, Overlay } from './style';
 
@@ -12,14 +12,9 @@ interface Props {
 export const Modal = ({ title, handleClose, children }: Props) => {
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  useEffect(() => {
-    const closeOnEscapeKey = (e: React.KeyboardEvent<HTMLDivElement>) =>
-      e.key === 'Escape' ? handleClose() : null;
-    document.body.addEventListener('keydown', closeOnEscapeKey);
-    return () => {
-      document.body.removeEventListener('keydown', closeOnEscapeKey);
-    };
-  }, [handleClose]);
+  useClickOutside(ref, () => {
+    handleClose();
+  });
 
   return (
     <Portal selector="#portal">

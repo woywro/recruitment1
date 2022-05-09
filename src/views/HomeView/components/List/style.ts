@@ -15,6 +15,8 @@ export const ListWrapper = styled.ol`
   @media only screen and ${breakpoints.device.sm} {
     grid-template-columns: 1fr 1fr;
   }
+  @media only screen and ${breakpoints.device.lg} {
+  }
 `;
 
 export const PokemonListItem = styled.li`

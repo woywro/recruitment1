@@ -1,6 +1,6 @@
-import { Button } from "../Button";
-import { Text } from "../Text";
-import { EmptyStateWrapper } from "./style";
+import { Button } from '../Button';
+import { Text } from '../Text';
+import { EmptyStateWrapper } from './style';
 interface Props {
   msg: String;
   buttonText?: String;
