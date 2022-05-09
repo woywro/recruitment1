@@ -18,7 +18,6 @@ interface Props {
 
 export const PokemonView = ({ pokemon }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const Modal = dynamic(() => import('../../components/Modal'));
 
   return (
     <Wrapper>

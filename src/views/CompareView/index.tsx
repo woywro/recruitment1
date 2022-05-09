@@ -1,14 +1,14 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollSync } from 'react-scroll-sync';
 import styled from 'styled-components';
 import { ComparedPokemonInterface } from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
-import { PokemonDataCard } from './components/PokemonDataCard';
 import { CompareWrapper, List } from './style';
+import dynamic from 'next/dynamic';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -55,9 +55,13 @@ export const CompareView = ({ pokemons }: Props) => {
     ComparedPokemonInterface[] | []
   >([]);
 
+  const PokemonDataCard = dynamic(() =>
+    import('./components/PokemonDataCard').then((mod) => mod.PokemonDataCard)
+  );
+
   const [getPokemon] = useLazyQuery(GET_POKEMON_DETAILS);
 
-  const highlightStats = () => {
+  const highlightStats = useCallback(() => {
     const highestStats = getHighestStats(comparedPokemons);
     const comparedPokemonsDeepCopy: ComparedPokemonInterface[] = JSON.parse(
       JSON.stringify(comparedPokemons)
@@ -73,7 +77,7 @@ export const CompareView = ({ pokemons }: Props) => {
       }
     });
     setComparedPokemonsList(comparedPokemonsDeepCopy);
-  };
+  }, [comparedPokemons]);
 
   useEffect(() => {
     highlightStats();

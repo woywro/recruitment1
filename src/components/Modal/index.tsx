@@ -27,7 +27,7 @@ export const Modal = ({ title, handleClose, children }: Props) => {
         <ModalWrapper ref={ref}>
           <ModalTitle>{title}</ModalTitle>
           <CloseButton onClick={handleClose}>x</CloseButton>
-          {children}
+          <>{children}</>
         </ModalWrapper>
       </Overlay>
     </Portal>

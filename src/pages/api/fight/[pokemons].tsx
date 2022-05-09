@@ -1,12 +1,11 @@
 import { client } from '../../../../apollo-client';
 import { gql } from '@apollo/client';
+import { pokemonSpeciesFormatter } from '../../../utils/pokemonSpeciesFormatter';
 export default async function handler(req, res) {
   const { pokemons } = req.query;
   const splitPokemons = pokemons.split('_');
-  const pokemon1 = splitPokemons[0];
-  const pokemon2 = splitPokemons[1];
-  console.log(pokemon1);
-  console.log(pokemon2);
+  const pokemon1 = pokemonSpeciesFormatter(splitPokemons[0]);
+  const pokemon2 = pokemonSpeciesFormatter(splitPokemons[1]);
 
   const getPokemon = gql`
     query ($pokemon: String!) {
@@ -40,13 +39,10 @@ export default async function handler(req, res) {
     } else if (pokemon1Stats < pokemon2Stats) {
       return pokemon2;
     } else {
-      return pokemon1;
+      return splitPokemons[Math.round(Math.random() * splitPokemons.length)];
     }
   };
   const winner = chooseWinner();
-  console.log(pokemon1Stats);
-  console.log(pokemon2Stats);
-  //   console.log(chooseWinner());
 
   res.end(`winner: ${winner}`);
 }

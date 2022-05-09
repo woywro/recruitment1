@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { hoverEffectText } from '../../../../mixins/hoverEffects';
+import breakpoints from '../../../../theme/breakpoints';
+
 export const ListWrapper = styled.ol`
   width: 100%;
   height: 100%;
@@ -8,7 +10,11 @@ export const ListWrapper = styled.ol`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   align-items: center;
+  justify-items: center;
   padding: 20px;
+  @media only screen and ${breakpoints.device.sm} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const PokemonListItem = styled.li`
