@@ -1,14 +1,9 @@
 import { useCallback, useState } from 'react';
-import styled from 'styled-components';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { Text } from '../../../../components/Text';
-import { hoverEffectBg } from '../../../../mixins/hoverEffects';
-import {
-  ComparedPokemonInterface,
-  PokemonInterface,
-} from '../../../../types/PokemonInterface';
+import { ComparedPokemonInterface } from '../../../../types/PokemonInterface';
 import { pokemonSpeciesFormatter } from '../../../../utils/pokemonSpeciesFormatter';
-import { Wrapper, List, ListItem } from './style';
+import { List, ListItem, Wrapper } from './style';
 
 interface Props {
   pokemons: string[];
@@ -25,25 +20,28 @@ export const PokemonChoiceCard = ({
 }: Props) => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddToComparision = (pokemon: string) => {
-    const comparedPokemonsSpecies = comparedPokemons.map((e) => {
-      return e.species;
-    });
-    if (comparedPokemonsSpecies.includes(pokemon)) {
-      alert('This pokemon is already on the list!');
-    } else {
-      setLoading(true);
-      getPokemon({
-        variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
-      }).then((res) => {
-        setComparedPokemons([
-          ...comparedPokemons,
-          { highestValues: [], ...res.data.getPokemon },
-        ]);
-        setLoading(false);
+  const handleAddToComparision = useCallback(
+    (pokemon: string) => {
+      const comparedPokemonsSpecies = comparedPokemons.map((e) => {
+        return e.species;
       });
-    }
-  };
+      if (comparedPokemonsSpecies.includes(pokemon)) {
+        alert('This pokemon is already on the list!');
+      } else {
+        setLoading(true);
+        getPokemon({
+          variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
+        }).then((res) => {
+          setComparedPokemons([
+            ...comparedPokemons,
+            { highestValues: [], ...res.data.getPokemon },
+          ]);
+          setLoading(false);
+        });
+      }
+    },
+    [comparedPokemons, setComparedPokemons, getPokemon]
+  );
 
   return (
     <Wrapper>

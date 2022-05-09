@@ -10,11 +10,8 @@ import {
 import { SectionField } from '../../../../components/SectionField';
 import { Section } from '../../../../components/Section';
 import { ComparisionList, Wrapper } from './style';
-
-interface DataInterface {
-  key: string;
-  value: string;
-}
+import { PokemonAbilities } from '../../../../components/PokemonAbilities';
+import { PokemonBaseStats } from '../../../../components/PokemonBaseStats';
 
 interface Props {
   comparedPokemon: ComparedPokemonInterface;
@@ -34,31 +31,6 @@ export const PokemonDataCard = ({
       );
       setComparedPokemons(itemsFiltered);
     },
-    [comparedPokemon]
-  );
-
-  const FormData = (property: {}) => {
-    const returnData: DataInterface[] = Object.entries(property)
-      .filter((e) => !e.includes('__typename'))
-      .map(([key, value]) => {
-        const formattedValue = (): string => {
-          if (value == null) {
-            return '-';
-          } else {
-            return value;
-          }
-        };
-        return { key, value: formattedValue() };
-      });
-    return returnData;
-  };
-
-  const Abilities: DataInterface[] = useMemo(
-    () => FormData(comparedPokemon.abilities),
-    [comparedPokemon]
-  );
-  const Stats: DataInterface[] = useMemo(
-    () => FormData(comparedPokemon.baseStats),
     [comparedPokemon]
   );
 
@@ -92,33 +64,11 @@ export const PokemonDataCard = ({
             <SectionField field={'species'} value={comparedPokemon.species} />
             <SectionField field={'types'} value={comparedPokemon.types} />
           </Section>
-          <Section title={'Abilities'}>
-            {Abilities.map((ability) => {
-              return (
-                <SectionField
-                  field={ability.key}
-                  value={ability.value}
-                  key={ability.key}
-                />
-              );
-            })}
-          </Section>
-          <Section title={'Stats'}>
-            {Stats.map((stat) => {
-              return (
-                <SectionField
-                  key={stat.key}
-                  field={stat.key}
-                  value={stat.value}
-                  isHighlighted={
-                    comparedPokemon.highestValues.includes(stat.key)
-                      ? true
-                      : false
-                  }
-                />
-              );
-            })}
-          </Section>
+          <PokemonAbilities abilities={comparedPokemon.abilities} />
+          <PokemonBaseStats
+            baseStats={comparedPokemon.baseStats}
+            highlightHighest={true}
+          />
           <Section title={'gender'}>
             <SectionField field={'male'} value={comparedPokemon.gender.male} />
             <SectionField

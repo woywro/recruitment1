@@ -5,8 +5,8 @@ import { PokemonInterface } from '../../types/PokemonInterface';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 import { SpritesView } from '../SpritesView';
 import { Wrapper } from '../style';
-import { Abilities } from './components/Abilities';
-import { BaseStats } from './components/BaseStats';
+import { PokemonAbilities } from '../../components/PokemonAbilities';
+import { PokemonBaseStats } from '../../components/PokemonBaseStats';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
 import { SectionWrapper, SpritesButton } from './style';
@@ -24,8 +24,8 @@ export const PokemonView = ({ pokemon }: Props) => {
       <Showcase pokemon={pokemon} />
       <SectionWrapper>
         <BasicInfo pokemon={pokemon} />
-        <Abilities pokemon={pokemon} />
-        <BaseStats pokemon={pokemon} />
+        <PokemonAbilities abilities={pokemon.abilities} />
+        <PokemonBaseStats baseStats={pokemon.baseStats} />
       </SectionWrapper>
       <SpritesButton onClick={() => setIsOpen(true)}>
         all available sprites <FcImageFile />

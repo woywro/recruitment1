@@ -32,7 +32,7 @@ export const SpritesView = ({ pokemonSpecies }: Props) => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <Wrapper>
+    <>
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -45,6 +45,6 @@ export const SpritesView = ({ pokemonSpecies }: Props) => {
           <SpriteElement sprite={data.getPokemon.shinyBackSprite} />
         </SpritesWrapper>
       )}
-    </Wrapper>
+    </>
   );
 };

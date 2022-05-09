@@ -8,6 +8,7 @@ import { getHighestStats } from '../../utils/getHighestStats';
 import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
 import { CompareWrapper, List } from './style';
+import { PokemonDataCard } from './components/PokemonDataCard';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {
@@ -53,12 +54,6 @@ export const CompareView = ({ pokemons }: Props) => {
   const [comparedPokemonsList, setComparedPokemonsList] = useState<
     ComparedPokemonInterface[]
   >([]);
-
-  const PokemonDataCard = dynamic(() =>
-    import('./components/PokemonDataCard').then(
-      (mod) => mod.PokemonDataCard as any
-    )
-  );
 
   const [getPokemon] = useLazyQuery(GET_POKEMON_DETAILS);
 
