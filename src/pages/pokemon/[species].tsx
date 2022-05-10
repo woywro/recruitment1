@@ -1,10 +1,9 @@
-import { client } from '../../../apollo-client';
 import { gql } from '@apollo/client';
-import { PokemonView } from '../../views/PokemonView';
-import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
-import { PokemonInterface } from '../../types/PokemonInterface';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
+import { client } from '../../../apollo-client';
+import { PokemonInterface } from '../../types/PokemonInterface';
+import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
+import { PokemonView } from '../../views/PokemonView';
 
 interface Props {
   pokemon: PokemonInterface;
@@ -33,7 +32,7 @@ export async function getStaticPaths() {
     return pokemonSpeciesFormatter(species);
   });
   const all = paths.map((e: string) => {
-    return { params: { id: e !== undefined ? e : '404' } };
+    return { params: { species: e !== undefined ? e : '404' } };
   });
   return {
     paths: all,
@@ -41,16 +40,16 @@ export async function getStaticPaths() {
   };
 }
 export const getStaticProps = async ({
-  params: { id },
+  params: { species },
 }: {
-  params: { id: string };
+  params: { species: string };
 }) => {
-  const species = id.toString();
+  const pokemonSpecies = species.toString();
   try {
     const { data } = await client.query({
       query: gql`
       {
-        getPokemon(pokemon: ${species}) {
+        getPokemon(pokemon: ${pokemonSpecies}) {
           sprite
           num
           species

@@ -31,7 +31,7 @@ export const PokemonChoiceCard = ({
       } else {
         getPokemon({
           variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
-        }).then((res) => {
+        }).then((res: any) => {
           setComparedPokemons([
             ...comparedPokemons,
             { highestValues: [], ...res.data.getPokemon },

@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function Portal({ children, selector }: Props) {
-  const ref = useRef<ElementType>(null);
+  const ref = useRef<any>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
