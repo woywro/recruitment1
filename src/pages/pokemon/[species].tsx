@@ -32,7 +32,7 @@ export async function getStaticPaths() {
     return pokemonSpeciesFormatter(species);
   });
   const all = paths.map((e: string) => {
-    return { params: { species: e !== undefined ? e : '404' } };
+    return { params: { species: e } };
   });
   return {
     paths: all,
