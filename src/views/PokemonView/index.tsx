@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FcImageFile } from 'react-icons/fc';
-import { Modal } from '../../components/Modal';
 import { PokemonAbilities } from '../../components/PokemonAbilities';
 import { PokemonBaseStats } from '../../components/PokemonBaseStats';
 import { PokemonInterface } from '../../types/PokemonInterface';
@@ -10,11 +9,8 @@ import { Wrapper } from '../style';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
 import { SectionWrapper, SpritesButton } from './style';
-<<<<<<< HEAD
-=======
-import type { Modal as ModalType } from '../../components/Modal';
 import { Props as ModalProps } from '../../components/Modal';
->>>>>>> dev
+import dynamic from 'next/dynamic';
 
 interface Props {
   pokemon: PokemonInterface;
