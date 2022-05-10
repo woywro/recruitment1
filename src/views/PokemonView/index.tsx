@@ -1,16 +1,15 @@
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { FcImageFile } from 'react-icons/fc';
+import { Modal } from '../../components/Modal';
+import { PokemonAbilities } from '../../components/PokemonAbilities';
+import { PokemonBaseStats } from '../../components/PokemonBaseStats';
 import { PokemonInterface } from '../../types/PokemonInterface';
 import { pokemonSpeciesFormatter } from '../../utils/pokemonSpeciesFormatter';
 import { SpritesView } from '../SpritesView';
 import { Wrapper } from '../style';
-import { PokemonAbilities } from '../../components/PokemonAbilities';
-import { PokemonBaseStats } from '../../components/PokemonBaseStats';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
 import { SectionWrapper, SpritesButton } from './style';
-import { Modal } from '../../components/Modal';
 
 interface Props {
   pokemon: PokemonInterface;

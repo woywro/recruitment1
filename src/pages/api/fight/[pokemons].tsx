@@ -1,13 +1,13 @@
-import { client } from '../../../../apollo-client';
 import { gql } from '@apollo/client';
-import { pokemonSpeciesFormatter } from '../../../utils/pokemonSpeciesFormatter';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { client } from '../../../../apollo-client';
+import { pokemonSpeciesFormatter } from '../../../utils/pokemonSpeciesFormatter';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const pokemons: any = req.query.pokemons;
+  const pokemons: string = req.query.pokemons as unknown as string;
   if (pokemons.indexOf('_') == -1) {
     throw new Error('You have to provide second species');
   }
@@ -27,29 +27,29 @@ export default async function handler(
     }
   `;
 
-  const fetchedPokemon1 = await client.query({
+  const pokemon1Query = await client.query({
     query: getPokemon,
     variables: {
       pokemon: pokemon1,
     },
   });
 
-  const fetchedPokemon2 = await client.query({
+  const pokemon2Query = await client.query({
     query: getPokemon,
     variables: {
       pokemon: pokemon2,
     },
   });
 
-  const pokemon1Stats =
-    fetchedPokemon1.data.getFuzzyPokemon[0].baseStats.attack;
-  const pokemon2Stats =
-    fetchedPokemon2.data.getFuzzyPokemon[0].baseStats.attack;
+  const fetchedPokemon1 = pokemon1Query.data.getFuzzyPokemon[0];
+  const fetchedPokemon2 = pokemon2Query.data.getFuzzyPokemon[0];
 
   const chooseWinner = () => {
-    if (pokemon1Stats > pokemon2Stats) {
+    if (fetchedPokemon1.baseStats.attack > fetchedPokemon2.baseStats.attack) {
       return pokemon1;
-    } else if (pokemon1Stats < pokemon2Stats) {
+    } else if (
+      fetchedPokemon1.baseStats.attack < fetchedPokemon2.baseStats.attack
+    ) {
       return pokemon2;
     } else {
       return splitPokemons[Math.round(Math.random() * 2)];
@@ -57,5 +57,7 @@ export default async function handler(
   };
   const winner = chooseWinner();
 
-  res.end(`winner: ${winner}`);
+  res.end(
+    `${fetchedPokemon1.species} vs ${fetchedPokemon2.species} winner: ${winner}`
+  );
 }

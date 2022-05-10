@@ -1,14 +1,13 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollSync } from 'react-scroll-sync';
 import { ComparedPokemonInterface } from '../../types/PokemonInterface';
 import { getHighestStats } from '../../utils/getHighestStats';
 import { Wrapper } from '../style';
 import { PokemonChoiceCard } from './components/PokemonChoiceCard';
-import { CompareWrapper, List } from './style';
 import { PokemonDataCard } from './components/PokemonDataCard';
+import { CompareWrapper, List } from './style';
 
 const GET_POKEMON_DETAILS = gql`
   query ($pokemon: PokemonEnum!) {

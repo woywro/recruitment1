@@ -3,11 +3,11 @@ import { createPortal } from 'react-dom';
 
 interface Props {
   children: JSX.Element;
-  selector: any;
+  selector: string;
 }
 
 export function Portal({ children, selector }: Props) {
-  const ref = useRef<ElementType>(null);
+  const ref = useRef<any>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

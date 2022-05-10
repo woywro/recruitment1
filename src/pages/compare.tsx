@@ -29,7 +29,7 @@ export async function getStaticProps() {
   });
   const allPokemonSpecies: string[] = data.getAllPokemonSpecies.map(
     (species: string) => {
-      return pokemonSpeciesFormatter(species);
+      return species;
     }
   );
 

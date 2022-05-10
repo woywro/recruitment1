@@ -1,6 +1,6 @@
 import { MobileNavBar } from '../MobileNavBar';
 import { NavBar } from '../NavBar';
-import { ChildrenWrapper, ViewBox, Wrapper } from './style';
+import { ChildrenWrapper, ViewBox, LayoutWrapper } from './style';
 
 interface Props {
   children: JSX.Element;
@@ -8,12 +8,12 @@ interface Props {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <Wrapper>
+    <LayoutWrapper>
       <ViewBox>
         <MobileNavBar />
         <NavBar />
         <ChildrenWrapper>{children}</ChildrenWrapper>
       </ViewBox>
-    </Wrapper>
+    </LayoutWrapper>
   );
 };

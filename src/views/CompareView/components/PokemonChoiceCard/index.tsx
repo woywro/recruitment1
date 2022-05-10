@@ -26,12 +26,12 @@ export const PokemonChoiceCard = ({
       const comparedPokemonsSpecies = comparedPokemons.map((e) => {
         return e.species;
       });
-      if (comparedPokemonsSpecies.includes(pokemon)) {
+      if (comparedPokemonsSpecies.includes(pokemonSpeciesFormatter(pokemon))) {
         alert('This pokemon is already on the list!');
       } else {
         getPokemon({
           variables: { pokemon: pokemonSpeciesFormatter(pokemon) },
-        }).then((res) => {
+        }).then((res: any) => {
           setComparedPokemons([
             ...comparedPokemons,
             { highestValues: [], ...res.data.getPokemon },

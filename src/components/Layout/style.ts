@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import breakpoints from '../../theme/breakpoints';
 
-export const Wrapper = styled.div`
+export const LayoutWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;

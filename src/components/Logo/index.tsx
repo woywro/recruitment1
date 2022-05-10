@@ -1,8 +1,5 @@
-import styled, { useTheme } from 'styled-components';
-import Image from 'next/image';
-import { ThemeInterface } from '../../types/ThemeInterface';
-import { LogoText } from './style';
 import { useRouter } from 'next/router';
+import { LogoText } from './style';
 
 interface Props {
   mobile?: boolean;

@@ -26,11 +26,9 @@ export const ModalWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-flow: column;
-  min-width: 300px;
-  min-height: 300px;
   overflow-y: hidden;
   @media only screen and ${breakpoints.device.lg} {
-    height: auto;
+    height: 100%;
     overflow-y: scroll;
   }
 `;
@@ -54,4 +52,13 @@ export const CloseButton = styled.button`
 export const ModalTitle = styled(Text)`
   margin: 10px;
   font-size: 28px;
+`;
+
+export const ModalChildren = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  min-width: 300px;
+  min-height: 300px;
 `;

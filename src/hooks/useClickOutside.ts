@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from 'react';
 
 type ListenerEvent = MouseEvent & {
   target: Element;
@@ -6,8 +6,7 @@ type ListenerEvent = MouseEvent & {
 
 const useClickOutside = (
   ref: RefObject<HTMLElement>,
-  callback: (event: MouseEvent) => void,
-  eventType: string = "click"
+  callback: (event: MouseEvent) => void
 ) => {
   const handlerRef = useRef(callback);
 
@@ -30,12 +29,12 @@ const useClickOutside = (
       }
     };
 
-    document.addEventListener(eventType, listener);
-    document.addEventListener("touchstart", listener);
-
+    document.addEventListener('click', listener as (e: MouseEvent) => void);
     return () => {
-      document.removeEventListener(eventType, listener);
-      document.removeEventListener("touchstart", listener);
+      document.removeEventListener(
+        'click',
+        listener as (e: MouseEvent) => void
+      );
     };
   });
 };
