@@ -10,7 +10,7 @@ import { Wrapper } from '../style';
 import { BasicInfo } from './components/BasicInfo';
 import { Showcase } from './components/Showcase';
 import { SectionWrapper, SpritesButton } from './style';
-
+import dynamic from 'next/dynamic';
 interface Props {
   pokemon: PokemonInterface;
 }
