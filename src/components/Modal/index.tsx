@@ -1,7 +1,13 @@
 import React, { useRef } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
 import { Portal } from '../../wrappers/Portal';
-import { CloseButton, ModalTitle, ModalWrapper, Overlay } from './style';
+import {
+  CloseButton,
+  ModalTitle,
+  ModalWrapper,
+  Overlay,
+  ModalChildren,
+} from './style';
 
 interface Props {
   title: string;
@@ -22,7 +28,7 @@ export const Modal = ({ title, handleClose, children }: Props) => {
         <ModalWrapper ref={ref}>
           <ModalTitle>{title}</ModalTitle>
           <CloseButton onClick={handleClose}>x</CloseButton>
-          <>{children}</>
+          <ModalChildren>{children}</ModalChildren>
         </ModalWrapper>
       </Overlay>
     </Portal>

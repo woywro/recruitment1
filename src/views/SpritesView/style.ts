@@ -4,4 +4,5 @@ export const SpritesWrapper = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
+  gap: 5px;
 `;

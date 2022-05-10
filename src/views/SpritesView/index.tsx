@@ -4,6 +4,7 @@ import React from 'react';
 import { client } from '../../../apollo-client';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
+import { Wrapper } from '../style';
 import { SpriteElement } from './components/SpriteElement';
 import { SpritesWrapper } from './style';
 
@@ -27,8 +28,6 @@ export const SpritesView = ({ pokemonSpecies }: Props) => {
     client: client,
     variables: { pokemon: pokemonSpecies },
   });
-
-  if (loading) return <LoadingSpinner />;
 
   return (
     <>
