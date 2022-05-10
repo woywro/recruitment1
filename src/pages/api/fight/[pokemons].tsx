@@ -52,7 +52,7 @@ export default async function handler(
     ) {
       return pokemon2;
     } else {
-      return splitPokemons[Math.round(Math.random() * 2)];
+      return splitPokemons[Math.round(Math.random() * 1)];
     }
   };
   const winner = chooseWinner();
