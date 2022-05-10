@@ -9,7 +9,7 @@ import {
   ModalChildren,
 } from './style';
 
-interface Props {
+export interface Props {
   title: string;
   handleClose: () => void;
   children: JSX.Element[] | JSX.Element;

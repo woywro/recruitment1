@@ -1,8 +1,7 @@
-import { client } from '../../apollo-client';
 import { gql } from '@apollo/client';
-import { CompareView } from '../views/CompareView';
-import { pokemonSpeciesFormatter } from '../utils/pokemonSpeciesFormatter';
 import Head from 'next/head';
+import { client } from '../../apollo-client';
+import { CompareView } from '../views/CompareView';
 
 interface Props {
   pokemons: string[];

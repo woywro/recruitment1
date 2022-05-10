@@ -17,7 +17,7 @@ export const Showcase = ({ pokemon }: Props) => {
           width="150px"
           height="150px"
           placeholder="blur"
-          blurDataURL="/assets/placeholder.png"
+          blurDataURL={pokemon.sprite}
           loading="lazy"
         ></Image>
       </div>
