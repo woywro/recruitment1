@@ -15,7 +15,7 @@ export const MyDocument = () => {
         />
 
         <link
-          href="http://fonts.cdnfonts.com/css/pokemon-solid"
+          href="https://fonts.cdnfonts.com/css/pokemon-solid"
           rel="stylesheet"
         ></link>
       </Head>

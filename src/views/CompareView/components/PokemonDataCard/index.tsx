@@ -50,7 +50,7 @@ export const PokemonDataCard = ({
               width="150px"
               height="150px"
               placeholder="blur"
-              blurDataURL="/assets/placeholder.png"
+              blurDataURL={comparedPokemon.sprite}
               loading="lazy"
             ></Image>
             <Text

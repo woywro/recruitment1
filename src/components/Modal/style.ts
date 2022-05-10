@@ -31,6 +31,10 @@ export const ModalWrapper = styled.div`
     height: 100%;
     overflow-y: scroll;
   }
+  @media only screen and ${breakpoints.device.lg} {
+    height: 100%;
+    overflow-y: scroll;
+  }
 `;
 
 export const CloseButton = styled.button`
