@@ -11,4 +11,4 @@
 - Since getAllPokemonSpecies returns duplicated values of some pokemon species, all pokemons are filtered to be unique. 
 
 # Live version
-https://blazity-recruitment-l5c3j9nko-woywro.vercel.app/
+https://blazity-recruitment-woywro.vercel.app/
